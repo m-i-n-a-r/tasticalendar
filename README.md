@@ -24,6 +24,6 @@ Just open the ```build.gradle (Module:app)``` file of your app, and under depend
 - Year layout (adaptive depending on the month scale factor)
 - Clickable days, clickable month titles
 - Easily set any property or render a different year/month
-- Esily pass a collection of dates or TastiCalendarEvent objects to highlight a set of dates on a month
+- Easily pass a collection of dates or TastiCalendarEvent objects to highlight a set of dates on a month
 - The library chooses the best contrast for the text color when a day is highlighted
 - Different highlighting strength based on the number of events in each day

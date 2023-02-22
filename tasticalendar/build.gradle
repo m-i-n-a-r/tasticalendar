@@ -41,6 +41,7 @@ dependencies {
 
     // Material components
     implementation 'com.google.android.material:material:1.9.0-alpha01'
+    implementation 'androidx.core:core-ktx:+'
 
     // Test dependencies
     testImplementation 'junit:junit:4.13.2'
