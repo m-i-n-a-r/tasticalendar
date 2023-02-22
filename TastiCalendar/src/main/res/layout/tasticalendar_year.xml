@@ -1,0 +1,117 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tastiCalendarYearMain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/standard_margin">
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/tastiCalendarYearFlow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/standard_margin"
+        app:constraint_referenced_ids="tastiCalendarYearJan, tastiCalendarYearFeb, tastiCalendarYearMar,tastiCalendarYearApr,tastiCalendarYearMay,tastiCalendarYearJun, tastiCalendarYearJul, tastiCalendarYearAug, tastiCalendarYearSep, tastiCalendarYearOct, tastiCalendarYearNov, tastiCalendarYearDec"
+        app:flow_horizontalGap="@dimen/in_row_padding"
+        app:flow_maxElementsWrap="6"
+        app:flow_wrapMode="aligned"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.minar.tasticalendar.core.TastiCalendarMonth
+        android:id="@+id/tastiCalendarYearJan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:month="january" />
+
+    <com.minar.tasticalendar.core.TastiCalendarMonth
+        android:id="@+id/tastiCalendarYearFeb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:month="february" />
+
+    <com.minar.tasticalendar.core.TastiCalendarMonth
+        android:id="@+id/tastiCalendarYearMar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:month="march" />
+
+    <com.minar.tasticalendar.core.TastiCalendarMonth
+        android:id="@+id/tastiCalendarYearApr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:month="april" />
+
+    <com.minar.tasticalendar.core.TastiCalendarMonth
+        android:id="@+id/tastiCalendarYearMay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:month="may" />
+
+    <com.minar.tasticalendar.core.TastiCalendarMonth
+        android:id="@+id/tastiCalendarYearJun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:month="june" />
+
+    <com.minar.tasticalendar.core.TastiCalendarMonth
+        android:id="@+id/tastiCalendarYearJul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:month="july" />
+
+    <com.minar.tasticalendar.core.TastiCalendarMonth
+        android:id="@+id/tastiCalendarYearAug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:month="august" />
+
+    <com.minar.tasticalendar.core.TastiCalendarMonth
+        android:id="@+id/tastiCalendarYearSep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:month="september" />
+
+    <com.minar.tasticalendar.core.TastiCalendarMonth
+        android:id="@+id/tastiCalendarYearOct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:month="october" />
+
+    <com.minar.tasticalendar.core.TastiCalendarMonth
+        android:id="@+id/tastiCalendarYearNov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:month="november" />
+
+    <com.minar.tasticalendar.core.TastiCalendarMonth
+        android:id="@+id/tastiCalendarYearDec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:month="december" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
