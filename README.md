@@ -14,7 +14,9 @@ I wrote this library starting from a piece of [Birday](https://www.github.com/m-
 ## How to use
 Just open the ```build.gradle (Module:app)``` file of your app, and under dependencies, add:
 
-``` implementation 'com.minar.tasticalendar:1.0.0' ```
+``` implementation 'com.github.m-i-n-a-r:tasticalendar:1.0.0' ```
+Further instructions and examples will come with future releases, since there's still something to add. 
+
 ## Features
 <img src='https://i.imgur.com/Zc0exjT.png' width='18%'/>
 
