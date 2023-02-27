@@ -15,6 +15,7 @@ import java.time.LocalDate
 import java.time.temporal.WeekFields
 import java.util.*
 
+@Suppress("MemberVisibilityCanBePrivate")
 class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
     // Custom attributes
     private var hideWeekDays: Boolean
@@ -104,11 +105,13 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
         // Highlight the dates (only if they exist in the current year)
         if (year == LocalDate.now().year) highlightCurrentDate()
         if (events != null && events.isNotEmpty()) {
-            // TODO Make sure the list is ordered
+            // Make sure the list is ordered
+            val orderedEvents = events.toMutableList()
+            orderedEvents.sortBy { it.date }
 
-            var currentDate = events[0].date
+            var currentDate = orderedEvents[0].date
             var dayEvents = mutableListOf<TastiCalendarEvent>()
-            for (event in events) {
+            for (event in orderedEvents) {
                 // Compute the snackbar text if enabled (and the list is ordered)
                 if (showAdvancedInfo) {
                     if (event.date.isEqual(currentDate.withYear(event.date.year))) {
@@ -132,8 +135,7 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
                 )
             }
         } else if (dates != null && dates.isNotEmpty()) {
-            // TODO Make sure the list is ordered
-
+            // The order is important for the labels, and it's not necessary in this case
             for (event in dates) {
                 highlightDate(
                     event,

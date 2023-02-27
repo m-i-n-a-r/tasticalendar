@@ -41,7 +41,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
     // Material components
-    implementation 'com.google.android.material:material:1.9.0-alpha01'
+    implementation 'com.google.android.material:material:1.9.0-alpha02'
     implementation 'androidx.core:core-ktx:1.9.0'
 
     // Test dependencies
@@ -55,7 +55,7 @@ publishing {
         release(MavenPublication) {
             groupId = 'com.github.m-i-n-a-r'
             artifactId = 'tasticalendar'
-            version = '1.0.0'
+            version = '1.0.1'
 
             afterEvaluate {
                 from components.release
