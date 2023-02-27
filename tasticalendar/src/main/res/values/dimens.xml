@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="calendar_month_day_padding">2dp</dimen>
-    <dimen name="minar_month_ring_thickness">1dp</dimen>
+    <dimen name="calendar_month_ring_thickness">1dp</dimen>
     <dimen name="between_row_padding">8dp</dimen>
     <dimen name="in_row_padding">3dp</dimen>
     <dimen name="standard_margin">16dp</dimen>

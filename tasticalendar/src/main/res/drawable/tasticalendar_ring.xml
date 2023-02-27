@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:innerRadiusRatio="2.3"
     android:shape="ring"
-    android:thickness="@dimen/minar_month_ring_thickness"
+    android:thickness="@dimen/calendar_month_ring_thickness"
     android:useLevel="false">
     <solid android:color="?attr/colorPrimary" />
 </shape>
