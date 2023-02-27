@@ -15,6 +15,7 @@ I wrote this library starting from a piece of [Birday](https://www.github.com/m-
 Just open the ```build.gradle (Module:app)``` file of your app, and under dependencies, add:
 
 ``` implementation 'com.github.m-i-n-a-r:tasticalendar:1.0.0' ```
+
 Further instructions and examples will come with future releases, since there's still something to add. 
 
 ## Features
