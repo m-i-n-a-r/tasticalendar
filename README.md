@@ -5,6 +5,7 @@ A simple library, based on Material You, to implement a monthly or yearly calend
 <p align='center'>
   <a href='https://github.com/m-i-n-a-r/birday/blob/master/LICENSE.md'><img src='https://img.shields.io/badge/license-GPL 3-333333'/></a>
   <img src='https://img.shields.io/github/v/release/m-i-n-a-r/tasticalendar'>
+  [![](https://jitpack.io/v/m-i-n-a-r/tasticalendar.svg)](https://jitpack.io/#m-i-n-a-r/tasticalendar)
 </p>
 
 ## Introduction
