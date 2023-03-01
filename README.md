@@ -16,7 +16,7 @@ I wrote this library starting from a piece of [Birday](https://www.github.com/m-
 ```maven { url "https://jitpack.io" }```
 
 2. Open the ```build.gradle (Module:app)``` file of your app, and under dependencies, add:\
-``` implementation 'com.github.m-i-n-a-r:tasticalendar:1.0.1' ```
+``` implementation 'com.github.m-i-n-a-r:tasticalendar:1.0.3' ```
 
 3. Sync Gradle, and you're good to go!
 
