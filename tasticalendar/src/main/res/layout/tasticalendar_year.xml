@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:month="january" />
+        app:tcMonth="january" />
 
     <com.minar.tasticalendar.core.TastiCalendarMonth
         android:id="@+id/tastiCalendarYearFeb"
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:month="february" />
+        app:tcMonth="february" />
 
     <com.minar.tasticalendar.core.TastiCalendarMonth
         android:id="@+id/tastiCalendarYearMar"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:month="march" />
+        app:tcMonth="march" />
 
     <com.minar.tasticalendar.core.TastiCalendarMonth
         android:id="@+id/tastiCalendarYearApr"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:month="april" />
+        app:tcMonth="april" />
 
     <com.minar.tasticalendar.core.TastiCalendarMonth
         android:id="@+id/tastiCalendarYearMay"
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:month="may" />
+        app:tcMonth="may" />
 
     <com.minar.tasticalendar.core.TastiCalendarMonth
         android:id="@+id/tastiCalendarYearJun"
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:month="june" />
+        app:tcMonth="june" />
 
     <com.minar.tasticalendar.core.TastiCalendarMonth
         android:id="@+id/tastiCalendarYearJul"
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:month="july" />
+        app:tcMonth="july" />
 
     <com.minar.tasticalendar.core.TastiCalendarMonth
         android:id="@+id/tastiCalendarYearAug"
@@ -80,7 +80,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:month="august" />
+        app:tcMonth="august" />
 
     <com.minar.tasticalendar.core.TastiCalendarMonth
         android:id="@+id/tastiCalendarYearSep"
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:month="september" />
+        app:tcMonth="september" />
 
     <com.minar.tasticalendar.core.TastiCalendarMonth
         android:id="@+id/tastiCalendarYearOct"
@@ -96,7 +96,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:month="october" />
+        app:tcMonth="october" />
 
     <com.minar.tasticalendar.core.TastiCalendarMonth
         android:id="@+id/tastiCalendarYearNov"
@@ -104,7 +104,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:month="november" />
+        app:tcMonth="november" />
 
     <com.minar.tasticalendar.core.TastiCalendarMonth
         android:id="@+id/tastiCalendarYearDec"
@@ -112,6 +112,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:month="december" />
+        app:tcMonth="december" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
