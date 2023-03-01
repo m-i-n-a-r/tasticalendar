@@ -4,7 +4,6 @@ A simple library, based on Material You, to implement a monthly or yearly calend
 
 <p align='center'>
   <a href='https://github.com/m-i-n-a-r/birday/blob/master/LICENSE.md'><img src='https://img.shields.io/badge/license-GPL 3-333333'/></a>
-  <img src='https://img.shields.io/github/v/release/m-i-n-a-r/tasticalendar'>
   <a href="(https://jitpack.io/#m-i-n-a-r/tasticalendar"><img src="https://jitpack.io/v/m-i-n-a-r/tasticalendar.svg" /></a>
 </p>
 
@@ -13,9 +12,13 @@ I wrote this library starting from a piece of [Birday](https://www.github.com/m-
 **Important**: this library is provided as is, no updates are guaranteed since i have other projects to focus on. It works (i use it personally in 2 projects) and is quite complete in my opinion, but I'm open to any criticism. This library doesn't need any translation since it doesn't use any string itself.
 
 ## How to use
-Just open the ```build.gradle (Module:app)``` file of your app, and under dependencies, add:
+1. Open the ```build.gradle (Project level)``` and, under repositories, make sure to have:\
+```maven { url "https://jitpack.io" }```
 
+2. Open the ```build.gradle (Module:app)``` file of your app, and under dependencies, add:\
 ``` implementation 'com.github.m-i-n-a-r:tasticalendar:1.0.1' ```
+
+3. Sync Gradle, and you're good to go!
 
 Further instructions and examples will come with future releases, since there's still something to add. 
 
