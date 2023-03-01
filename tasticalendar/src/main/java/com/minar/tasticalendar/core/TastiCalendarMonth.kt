@@ -44,11 +44,11 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             attrs, R.styleable.TastiCalendarMonth, 0, 0
         ).apply {
             try {
-                month = getInteger(R.styleable.TastiCalendarMonth_month, 0)
-                hideWeekDays = getBoolean(R.styleable.TastiCalendarMonth_hideWeekDays, false)
-                sundayFirst = getBoolean(R.styleable.TastiCalendarMonth_sundayAsFirstDay, false)
-                showSnackBars = getBoolean(R.styleable.TastiCalendarMonth_showInfoSnackBars, true)
-                appearance = getInteger(R.styleable.TastiCalendarMonth_appearance, 0)
+                month = getInteger(R.styleable.TastiCalendarMonth_tcMonth, 0)
+                hideWeekDays = getBoolean(R.styleable.TastiCalendarMonth_tcHideWeekDays, false)
+                sundayFirst = getBoolean(R.styleable.TastiCalendarMonth_tcSundayFirst, false)
+                showSnackBars = getBoolean(R.styleable.TastiCalendarMonth_tcShowInfoSnackBars, true)
+                appearance = getInteger(R.styleable.TastiCalendarMonth_tcAppearance, 0)
             } finally {
                 recycle()
             }

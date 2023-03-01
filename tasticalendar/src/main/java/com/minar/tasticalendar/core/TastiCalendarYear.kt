@@ -33,11 +33,11 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
             attrs, R.styleable.TastiCalendarYear, 0, 0
         ).apply {
             try {
-                hideWeekDays = getBoolean(R.styleable.TastiCalendarYear_hideWeekDays, false)
-                sundayFirst = getBoolean(R.styleable.TastiCalendarYear_sundayAsFirstDay, false)
-                showSnackBars = getBoolean(R.styleable.TastiCalendarYear_showInfoSnackBars, true)
-                showAdvancedInfo = getBoolean(R.styleable.TastiCalendarYear_showAdvancedInfo, false)
-                appearance = getInteger(R.styleable.TastiCalendarYear_appearance, 0)
+                hideWeekDays = getBoolean(R.styleable.TastiCalendarYear_tcHideWeekDays, false)
+                sundayFirst = getBoolean(R.styleable.TastiCalendarYear_tcSundayFirst, false)
+                showSnackBars = getBoolean(R.styleable.TastiCalendarYear_tcShowInfoSnackBars, true)
+                showAdvancedInfo = getBoolean(R.styleable.TastiCalendarYear_tcShowAdvancedInfo, false)
+                appearance = getInteger(R.styleable.TastiCalendarYear_tcAppearance, 0)
             } finally {
                 recycle()
             }

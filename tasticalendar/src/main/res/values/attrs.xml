@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="sundayAsFirstDay" format="boolean" />
-    <attr name="hideWeekDays" format="boolean" />
-    <attr name="showInfoSnackBars" format="boolean" />
-    <attr name="appearance" format="enum">
+    <attr name="tcSundayFirst" format="boolean" />
+    <attr name="tcHideWeekDays" format="boolean" />
+    <attr name="tcShowInfoSnackBars" format="boolean" />
+    <attr name="tcAppearance" format="enum">
         <enum name="small" value="0" />
         <enum name="medium" value="1" />
         <enum name="large" value="2" />
@@ -11,9 +11,9 @@
     </attr>
 
     <declare-styleable name="TastiCalendarMonth">
-        <attr name="sundayAsFirstDay" />
-        <attr name="hideWeekDays" />
-        <attr name="month" format="enum">
+        <attr name="tcSundayFirst" />
+        <attr name="tcHideWeekDays" />
+        <attr name="tcMonth" format="enum">
             <enum name="january" value="0" />
             <enum name="february" value="1" />
             <enum name="march" value="2" />
@@ -27,15 +27,15 @@
             <enum name="november" value="10" />
             <enum name="december" value="11" />
         </attr>
-        <attr name="showInfoSnackBars" />
-        <attr name="appearance" />
+        <attr name="tcShowInfoSnackBars" />
+        <attr name="tcAppearance" />
     </declare-styleable>
 
     <declare-styleable name="TastiCalendarYear">
-        <attr name="sundayAsFirstDay" />
-        <attr name="hideWeekDays" />
-        <attr name="showInfoSnackBars" />
-        <attr name="showAdvancedInfo" format="boolean" />
-        <attr name="appearance" />
+        <attr name="tcSundayFirst" />
+        <attr name="tcHideWeekDays" />
+        <attr name="tcShowInfoSnackBars" />
+        <attr name="tcShowAdvancedInfo" format="boolean" />
+        <attr name="tcAppearance" />
     </declare-styleable>
 </resources>
