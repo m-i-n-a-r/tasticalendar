@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:text="@string/unknown"
+        android:text="@string/tc_unknown"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:textColor="?attr/colorSecondary" />
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
             android:textColor="?attr/colorOnSurfaceVariant" />
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
             android:textColor="?attr/colorOnSurfaceVariant" />
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
             android:textColor="?attr/colorOnSurfaceVariant" />
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
             android:textColor="?attr/colorOnSurfaceVariant" />
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
             android:textColor="?attr/colorOnSurfaceVariant" />
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
             android:textColor="?attr/colorOnSurfaceVariant" />
@@ -86,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
             android:textColor="?attr/colorOnSurfaceVariant" />
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -119,7 +119,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -152,7 +152,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -163,7 +163,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -174,7 +174,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -185,7 +185,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -196,7 +196,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -207,7 +207,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -218,7 +218,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -229,7 +229,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -240,7 +240,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -251,7 +251,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -262,7 +262,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -273,7 +273,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -284,7 +284,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -295,7 +295,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -306,7 +306,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -317,7 +317,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -328,7 +328,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -339,7 +339,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -350,7 +350,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -361,7 +361,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -372,7 +372,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -383,7 +383,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -394,7 +394,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -405,7 +405,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -416,7 +416,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -427,7 +427,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -438,7 +438,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -449,7 +449,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -460,7 +460,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -471,7 +471,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -482,7 +482,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
@@ -493,7 +493,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:padding="@dimen/calendar_month_day_padding"
-            android:text="@string/unknown"
+            android:text="@string/tc_unknown"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             android:textColor="?attr/colorOnSurface" />
