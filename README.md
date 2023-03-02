@@ -23,7 +23,9 @@ I wrote this library starting from a piece of [Birday](https://www.github.com/m-
 Further instructions and examples will come with future releases, since there's still something to add. 
 
 ## Features
-<img src='https://i.imgur.com/Zc0exjT.png' width='18%'/>
+<p align='center'>
+  <img src='https://i.imgur.com/Zc0exjT.png' width='50%'/>
+</p>
 
 - Super lightweight
 - The color scheme automatically adapts to the app (Material You / Monet)
