@@ -24,6 +24,7 @@ import java.time.format.FormatStyle
 import java.time.format.TextStyle
 import java.util.*
 
+@Suppress("MemberVisibilityCanBePrivate")
 class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
     // Custom attributes
     private var month = 0
@@ -38,6 +39,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     private lateinit var monthTitle: TextView
     private var binding: TasticalendarMonthBinding
     private var eventCount = 0
+    private var snackBarsPrefix = ""
 
     init {
         context.theme.obtainStyledAttributes(
@@ -56,6 +58,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         binding = TasticalendarMonthBinding.inflate(LayoutInflater.from(context), this, true)
         dateWithChosenMonth = LocalDate.now().withMonth(month + 1).withDayOfMonth(1)
         initMonth()
+        renderMonth(dateWithChosenMonth)
     }
 
     // Render the appropriate numbers and hide any useless text view
@@ -108,7 +111,29 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         }
     }
 
-    // Highlight a day in the month using a drawable or a color
+    /**
+     * Highlights a given date in the month
+     * <p>
+     * This highlights a day in a variety of ways depending on the
+     * parameters. Some parameters may not work properly in certain cases
+     *
+     * @param day Int and not null, represents the day to highlight. If the month
+     * doesn't have the day, nothing will be highlighted
+     * @param color the color used to highlight the month, if no drawable is specified.
+     * by default of the library, is taken from the system
+     * @param drawable a drawable used as background, replacing the default colored circle.
+     * It can be null
+     * @param makeBold Boolean, false by default, if true the day text will be in bold style. It has some problems,
+     * since when the font is bold, it loses the monospace feature
+     * @param autoOpacity Boolean, false by default, if true allow different opacity levels of the background,
+     * depending on how many times the day has been highlighted before
+     * @param autoTextColor Boolean, false by default, if true the text color will be computed
+     * automatically to grant the best contrast available
+     * @param asForeground Boolean, false by default, if true the drawable or color will be used as
+     * foreground, thus covering the text, totally or partially
+     * @param snackbarText String, a text to display if the day cell is clicked, empty by default. If empty
+     * or null, the cell won't react to clicks
+     */
     fun highlightDay(
         day: Int,
         color: Int,
@@ -177,7 +202,11 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         }
     }
 
-    // Initialize the month
+    /**
+     * Initializes the layout for the month, assigning the bindings and the visibilities
+     * <p>
+     * This is used once when the layout is first created
+     */
     private fun initMonth() {
         // Week days
         val weekDayOne = binding.tastiCalendarWeekDayOne
@@ -270,6 +299,18 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             cell37
         )
 
+
+    }
+
+    /**
+     * Renders a given month in a given year
+     * <p>
+     * This reloads the entire layout and apply the current settings,
+     * it's the core method of the class
+     *
+     * @param date the date with the given month or year, if null the initial date is used
+     */
+    fun renderMonth(date: LocalDate = dateWithChosenMonth) {
         // Set the letters for the week days
         val monday = DayOfWeek.MONDAY
         val tuesday = DayOfWeek.TUESDAY
@@ -281,37 +322,38 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         val locale = Locale.getDefault()
         if (!hideWeekDays) {
             if (!sundayFirst) {
-                weekDayOne.text = monday.getDisplayName(TextStyle.NARROW, locale)
-                weekDayTwo.text = tuesday.getDisplayName(TextStyle.NARROW, locale)
-                weekDayThree.text = wednesday.getDisplayName(TextStyle.NARROW, locale)
-                weekDayFour.text = thursday.getDisplayName(TextStyle.NARROW, locale)
-                weekDayFive.text = friday.getDisplayName(TextStyle.NARROW, locale)
-                weekDaySix.text = saturday.getDisplayName(TextStyle.NARROW, locale)
-                weekDaySeven.text = sunday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[0].text = monday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[1].text = tuesday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[2].text = wednesday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[3].text = thursday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[4].text = friday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[5].text = saturday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[6].text = sunday.getDisplayName(TextStyle.NARROW, locale)
             } else {
-                weekDayOne.text = sunday.getDisplayName(TextStyle.NARROW, locale)
-                weekDayTwo.text = monday.getDisplayName(TextStyle.NARROW, locale)
-                weekDayThree.text = tuesday.getDisplayName(TextStyle.NARROW, locale)
-                weekDayFour.text = wednesday.getDisplayName(TextStyle.NARROW, locale)
-                weekDayFive.text = thursday.getDisplayName(TextStyle.NARROW, locale)
-                weekDaySix.text = friday.getDisplayName(TextStyle.NARROW, locale)
-                weekDaySeven.text = saturday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[0].text = sunday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[1].text = monday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[2].text = tuesday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[3].text = wednesday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[4].text = thursday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[5].text = friday.getDisplayName(TextStyle.NARROW, locale)
+                weekDaysList[6].text = saturday.getDisplayName(TextStyle.NARROW, locale)
             }
         } else {
-            weekDayOne.visibility = View.GONE
-            weekDayTwo.visibility = View.GONE
-            weekDayThree.visibility = View.GONE
-            weekDayFour.visibility = View.GONE
-            weekDayFive.visibility = View.GONE
-            weekDaySix.visibility = View.GONE
-            weekDaySeven.visibility = View.GONE
+            weekDaysList[0].visibility = View.GONE
+            weekDaysList[1].visibility = View.GONE
+            weekDaysList[2].visibility = View.GONE
+            weekDaysList[3].visibility = View.GONE
+            weekDaysList[4].visibility = View.GONE
+            weekDaysList[5].visibility = View.GONE
+            weekDaysList[6].visibility = View.GONE
         }
 
+        val firstDayDate = date.withDayOfMonth(1)
         // Set the number and name (capitalized) for the month (from range 0-11 to 1-12)
-        val firstDayOfWeekForChosenMonth = dateWithChosenMonth.dayOfWeek
+        val firstDayOfWeekForChosenMonth = firstDayDate.dayOfWeek
         monthTitle = binding.tastiCalendarMonthName
         monthTitle.text =
-            dateWithChosenMonth.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
+            firstDayDate.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
                 .replaceFirstChar {
                     if (it.isLowerCase()) it.titlecase(Locale.getDefault())
                     else it.toString()
@@ -346,8 +388,8 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         // Show snack bars on month header press
         if (showSnackBars) {
             monthTitle.setOnClickListener {
-                // TODO Just prints the number of events, quite ugly
-                val content = eventCount.toString()
+                val content =
+                    if (snackBarsPrefix.isEmpty()) "-> $eventCount" else "$snackBarsPrefix $eventCount"
                 showSnackbar(content, binding.root)
             }
         }
@@ -417,8 +459,14 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     fun setSundayFirst(enable: Boolean) {
         if (enable != sundayFirst) {
             sundayFirst = enable
-            initMonth()
+            renderMonth()
         }
+    }
+
+    // Adds the given prefix to the start of the message in the month headers snack bars
+    fun setSnackBarsPrefix(prefix: String) {
+        snackBarsPrefix = prefix
+        renderMonth()
     }
 
     // Set a specific year for the overview screen
@@ -431,7 +479,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             )
         )
         dateWithChosenMonth = dateWithChosenMonth.withYear(year)
-        initMonth()
+        renderMonth()
     }
 
     // Reset every highlighted cell to the normal state
