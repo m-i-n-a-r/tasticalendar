@@ -15,7 +15,15 @@ import java.time.LocalDate
 import java.time.temporal.WeekFields
 import java.util.*
 
-@Suppress("MemberVisibilityCanBePrivate")
+/**
+ * A class representing a yearly calendar.
+ * <p>
+ * This uses the month class to generate a grid of 12 months.
+ * @see TastiCalendarMonth
+ * @param context the context of the view.
+ * @param attrs the set of attributes specified in the layout.
+ */
+@Suppress("MemberVisibilityCanBePrivate", "unused")
 class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
     // Custom attributes
     private var hideWeekDays: Boolean
@@ -24,6 +32,7 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
     private var showAdvancedInfo: Boolean
     private var appearance: Int
 
+    // Other useful variables
     private var year: Int = LocalDate.now().year
     private lateinit var monthList: MutableList<TastiCalendarMonth>
     private var binding: TasticalendarYearBinding
@@ -36,7 +45,8 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
                 hideWeekDays = getBoolean(R.styleable.TastiCalendarYear_tcHideWeekDays, false)
                 sundayFirst = getBoolean(R.styleable.TastiCalendarYear_tcSundayFirst, false)
                 showSnackBars = getBoolean(R.styleable.TastiCalendarYear_tcShowInfoSnackBars, true)
-                showAdvancedInfo = getBoolean(R.styleable.TastiCalendarYear_tcShowAdvancedInfo, false)
+                showAdvancedInfo =
+                    getBoolean(R.styleable.TastiCalendarYear_tcShowAdvancedInfo, false)
                 appearance = getInteger(R.styleable.TastiCalendarYear_tcAppearance, 0)
             } finally {
                 recycle()
@@ -46,7 +56,11 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
         initYear()
     }
 
-    // Initialize the month
+    /**
+     * Initializes the layout for the year, assigning the bindings and the visibilities.
+     * <p>
+     * This is used once when the layout is first created.
+     */
     private fun initYear() {
         // Months
         val january = binding.tastiCalendarYearJan
@@ -94,7 +108,36 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
         }
     }
 
-    // Set a specific year for the overview screen
+    /**
+     * Highlights the current date with a ring.
+     * <p>
+     * This is only used internally, to circle the current day, if the displayed year
+     * is the current year.
+     * @param drawable a drawable to replace the default ring, it can be null.
+     * @param color a color to replace the default color (colorTertiary), it can be null.
+     */
+    private fun highlightCurrentDate(drawable: Drawable? = null, color: Int? = null) {
+        val date = LocalDate.now()
+        if (date.year != year) return
+        val chosenColor =
+            color ?: getThemeColor(com.google.android.material.R.attr.colorTertiary, context)
+        val chosenDrawable =
+            drawable ?: AppCompatResources.getDrawable(context, R.drawable.tasticalendar_ring)
+        highlightDate(date, chosenColor, chosenDrawable, asForeground = true)
+    }
+
+    /**
+     * Renders a given year.
+     * <p>
+     * This reloads the entire layout and apply the current settings,
+     * it's the core method of the class. If both events and dates are not null, the
+     * latter will be ignored.
+     * @see TastiCalendarEvent
+     * @param year the year to render, it can't be null, but it can also be negative.
+     * @param events a list of TastiCalendarEvents, used to highlight a set of dates also adding.
+     * labels to it, if showAdvancedInfo is set to true. It can be null.
+     * @param dates a simple list of dates, used to highlight a set of dates. It can be null.
+     */
     fun renderYear(year: Int, events: List<TastiCalendarEvent>?, dates: List<LocalDate>?) {
         this.year = year
         for (month in monthList) {
@@ -149,8 +192,31 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
         }
     }
 
-    // Highlight a date in a year, delegating the highlight to the correct month
-    private fun highlightDate(
+    /**
+     * A wrapper around the highlight function of the month.
+     * <p>
+     * This highlights a day in a variety of ways depending on the
+     * parameters. Some parameters may not work properly in certain cases.
+     *
+     * @param date the date to highlight. The year is not considered, and the date is used to
+     * find the correct month in the year and call its function.
+     * @param color the color used to highlight the month, if no drawable is specified,
+     * by default of the library, it's taken from the system.
+     * @param drawable a drawable used as background, replacing the default colored circle.
+     * It can be null.
+     * @param makeBold Boolean, false by default, if true the day text will be in bold style. It has some problems,
+     * since when the font is bold, it loses the monospace feature.
+     * @param autoOpacity Boolean, false by default, if true allow different opacity levels of the background,
+     * depending on how many times the day has been highlighted before.
+     * @param autoTextColor Boolean, false by default, if true the text color will be computed
+     * automatically to grant the best contrast available.
+     * @param asForeground Boolean, false by default, if true the drawable or color will be used as
+     * foreground, thus covering the text, totally or partially.
+     * @param snackbarText String, a text to display if the day cell is clicked, empty by default. If empty
+     * or null, the cell won't react to clicks.
+     * @see TastiCalendarMonth.highlightDay
+     */
+    fun highlightDate(
         date: LocalDate?,
         color: Int,
         drawable: Drawable?,
@@ -173,22 +239,24 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
         )
     }
 
-    // Highlight the current date with a ring
-    private fun highlightCurrentDate(drawable: Drawable? = null, color: Int? = null) {
-        val date = LocalDate.now()
-        if (date.year != year) return
-        val chosenColor = color ?: getThemeColor(com.google.android.material.R.attr.colorTertiary, context)
-        val chosenDrawable =
-            drawable ?: AppCompatResources.getDrawable(context, R.drawable.tasticalendar_ring)
-        highlightDate(date, chosenColor, chosenDrawable, asForeground = true)
-    }
-
-    // Enable additional snack bars
+    /**
+     * Changes the behavior of the messages displayed.
+     * <p>
+     * It is used to display advanced information when a day is pressed.
+     * @param enabled Boolean, can't be null, if true enables the advanced info parameter.
+     */
     fun setAdvancedInfoEnabled(enabled: Boolean) {
         showAdvancedInfo = enabled
     }
 
-    // Set the appearance of the entire year, returns the current appearance
+    /**
+     * Changes the visual density of the year.
+     * <p>
+     * It is used to cycle between appearances and it's basically a wrapper around
+     * the function of TastiCalendarMonth.
+     * @param appearance Int, can't be null, 0 means small, 1 medium, 2 large, 3 extra large.
+     * Every other value is ignored.
+     */
     fun setAppearance(appearance: Int): Int {
         if (appearance > 3 || appearance < 0) {
             this.appearance += 1

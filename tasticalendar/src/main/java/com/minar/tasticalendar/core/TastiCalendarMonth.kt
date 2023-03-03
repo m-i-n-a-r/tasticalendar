@@ -28,10 +28,10 @@ import java.util.*
  * A class representing a month.
  * <p>
  * It can be used alone, or in combination with TastiCalendarYear to
- * render a yearly calendar. Many properties are customizable
+ * render a yearly calendar. Many properties are customizable.
  * @see TastiCalendarYear
- * @param context the context of the view
- * @param attrs the set of attributes specified in the layout
+ * @param context the context of the view.
+ * @param attrs the set of attributes specified in the layout.
  */
 @Suppress("MemberVisibilityCanBePrivate", "unused")
 class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
@@ -72,9 +72,9 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     }
 
     /**
-     * Initializes the layout for the month, assigning the bindings and the visibilities
+     * Initializes the layout for the month, assigning the bindings and the visibilities.
      * <p>
-     * This is used once when the layout is first created
+     * This is used once when the layout is first created.
      */
     private fun initMonth() {
         // Week days
@@ -170,10 +170,10 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     }
 
     /**
-     * Renders a given range of days
+     * Renders a given range of days.
      * <p>
-     * This is used to hide unnecessary cells
-     * @param monthRange the range of days to render
+     * This is used to hide unnecessary cells.
+     * @param monthRange the range of days to render.
      */
     private fun renderDays(monthRange: Range<Int>) {
         val min = monthRange.lower
@@ -225,27 +225,27 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     }
 
     /**
-     * Highlights a given date in the month
+     * Highlights a given date in the month.
      * <p>
      * This highlights a day in a variety of ways depending on the
-     * parameters. Some parameters may not work properly in certain cases
+     * parameters. Some parameters may not work properly in certain cases.
      *
      * @param day Int and not null, represents the day to highlight. If the month
-     * doesn't have the day, nothing will be highlighted
+     * doesn't have the day, nothing will be highlighted.
      * @param color the color used to highlight the month, if no drawable is specified.
-     * by default of the library, is taken from the system
+     * by default of the library, is taken from the system.
      * @param drawable a drawable used as background, replacing the default colored circle.
-     * It can be null
+     * It can be null.
      * @param makeBold Boolean, false by default, if true the day text will be in bold style. It has some problems,
-     * since when the font is bold, it loses the monospace feature
+     * since when the font is bold, it loses the monospace feature.
      * @param autoOpacity Boolean, false by default, if true allow different opacity levels of the background,
-     * depending on how many times the day has been highlighted before
+     * depending on how many times the day has been highlighted before.
      * @param autoTextColor Boolean, false by default, if true the text color will be computed
-     * automatically to grant the best contrast available
+     * automatically to grant the best contrast available.
      * @param asForeground Boolean, false by default, if true the drawable or color will be used as
-     * foreground, thus covering the text, totally or partially
+     * foreground, thus covering the text, totally or partially.
      * @param snackbarText String, a text to display if the day cell is clicked, empty by default. If empty
-     * or null, the cell won't react to clicks
+     * or null, the cell won't react to clicks.
      */
     fun highlightDay(
         day: Int,
@@ -315,15 +315,13 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         }
     }
 
-
-
     /**
-     * Renders a given month in a given year
+     * Renders a given month in a given year.
      * <p>
      * This reloads the entire layout and apply the current settings,
-     * it's the core method of the class
+     * it's the core method of the class.
      *
-     * @param date the date with the given month or year, if null the initial date is used
+     * @param date the date with the given month or year, if null the initial date is used.
      */
     fun renderMonth(date: LocalDate = dateWithChosenMonth) {
         // Set the letters for the week days
@@ -362,8 +360,19 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             weekDaysList[5].visibility = View.GONE
             weekDaysList[6].visibility = View.GONE
         }
-
+        // Some resetting logic
+        if (date.year != dateWithChosenMonth.year) {
+            eventCount = 0
+            binding.tastiCalendarMonthName.setTextColor(
+                getThemeColor(
+                    com.google.android.material.R.attr.colorSecondary,
+                    context
+                )
+            )
+        }
         val firstDayDate = date.withDayOfMonth(1)
+        dateWithChosenMonth = firstDayDate
+
         // Set the number and name (capitalized) for the month (from range 0-11 to 1-12)
         val firstDayOfWeekForChosenMonth = firstDayDate.dayOfWeek
         monthTitle = binding.tastiCalendarMonthName
@@ -419,9 +428,9 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     }
 
     /**
-     * Change the visual density of the month
+     * Changes the visual density of the month.
      * <p>
-     * It is used to obtain different visualization styles
+     * It is used to obtain different visualization styles.
      * @param appearance Int, can't be null, 0 means small, 1 medium, 2 large, 3 extra large.
      * Every other value is ignored.
      */
@@ -477,12 +486,12 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     }
 
     /**
-     * Initializes the layout for the month, assigning the bindings and the visibilities
+     * Initializes the layout for the month, assigning the bindings and the visibilities.
      * <p>
      * This is used to force sunday as the first day of the week. If this method isn't called, the
-     * first day of the week is automatically taken from the default locale
+     * first day of the week is automatically taken from the default locale.
      * @param enable Boolean, can't be null, if true sets sunday as the first day of the week
-     * for the current month
+     * for the current month.
      */
     fun setSundayFirst(enable: Boolean) {
         if (enable != sundayFirst) {
@@ -492,34 +501,29 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     }
 
     /**
-     * Add the given prefix to the message shown when tapping the month header
+     * Add the given prefix to the message shown when tapping the month header.
      * <p>
      * This is used to display something before the number of events in the month,
-     * in the form "<prefix> <events number>" (eg: "Events: 12")
-     * @param prefix String, can't be null, the prefix to add to the snackbar message
+     * in the form "<prefix> <events number>" (eg: "Events: 12").
+     * @param prefix String, can't be null, the prefix to add to the snackbar message.
      */
     fun setSnackBarsPrefix(prefix: String) {
         snackBarsPrefix = prefix
         renderMonth()
     }
 
-    // Set a specific year for the overview screen
-    fun setYear(year: Int) {
-        eventCount = 0
-        binding.tastiCalendarMonthName.setTextColor(
-            getThemeColor(
-                com.google.android.material.R.attr.colorSecondary,
-                context
-            )
-        )
-        dateWithChosenMonth = dateWithChosenMonth.withYear(year)
-        renderMonth()
-    }
+    /**
+     * Renders the same month for a different year.
+     * <p>
+     * Basically a wrapper around renderMonth, used to quickly switch only the year.
+     * @param year Int, can't be null, represents the year to display this month into.
+     */
+    fun setYear(year: Int) = renderMonth(dateWithChosenMonth.withYear(year))
 
     /**
-     * Resets the highlighting for the current month, thus removing every event from it
+     * Resets the highlighting for the current month, thus removing every event from it.
      * <p>
-     * It can be used to display a new set of events, or a different month
+     * It can be used to display a new set of events, or a different month.
      */
     fun resetHighlighting() {
         for (cell in cellsList) {
@@ -539,10 +543,10 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     }
 
     /**
-     * Mainly used when the appearance changes, it colorizes some elements in the layout
+     * Mainly used when the appearance changes, it colorizes some elements in the layout.
      * <p>
      * This is used to colorize the current month, the other months, and to slightly change
-     * the weekdays text opacity (.85)
+     * the weekdays text opacity (.85).
      */
     private fun colorize() {
         if (dateWithChosenMonth.month == LocalDate.now().month && dateWithChosenMonth.year == LocalDate.now().year) {
