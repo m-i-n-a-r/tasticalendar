@@ -138,7 +138,7 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
      * labels to it, if showAdvancedInfo is set to true. It can be null.
      * @param dates a simple list of dates, used to highlight a set of dates. It can be null.
      */
-    fun renderYear(year: Int, events: List<TastiCalendarEvent>?, dates: List<LocalDate>?) {
+    fun renderYear(year: Int, events: List<TastiCalendarEvent>?, dates: List<LocalDate>? = null) {
         this.year = year
         for (month in monthList) {
             month.setYear(year)
@@ -237,6 +237,18 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
             asForeground = asForeground,
             snackbarText = snackbarText
         )
+    }
+
+    /**
+     * Add the given prefix to the message shown when tapping the month header.
+     * <p>
+     * This is used to display something before the number of events for each month,
+     * in the year, in the form "<prefix> <events number>" (eg: "Events: 12").
+     * @param prefix String, can't be null, the prefix to add to the snackbar message.
+     */
+    fun setSnackBarsPrefix(prefix: String) {
+        for (month in monthList)
+            month.setSnackBarsPrefix(prefix)
     }
 
     /**
