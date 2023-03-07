@@ -4,8 +4,13 @@ A simple library, based on Material You, to implement a monthly or yearly calend
 
 <p align='center'>
   <a href='https://github.com/m-i-n-a-r/birday/blob/master/LICENSE.md'><img src='https://img.shields.io/badge/license-GPL 3-333333'/></a>
-  <a href="(https://jitpack.io/#m-i-n-a-r/tasticalendar"><img src="https://jitpack.io/v/m-i-n-a-r/tasticalendar.svg" /></a>
+  <a href="https://jitpack.io/#m-i-n-a-r/tasticalendar"><img src="https://jitpack.io/v/m-i-n-a-r/tasticalendar.svg" /></a>
+  <a href="https://m-i-n-a-r.github.io/tasticalendar/">
+  <img alt="Javadoc" src="https://img.shields.io/badge/Read%20the%20documentation-7F52FF?logo=readthedocs&logoColor=white" />
+  </a>
 </p>
+
+[Read the docs!](https://m-i-n-a-r.github.io/tasticalendar/)
 
 ## Introduction
 I wrote this library starting from a piece of [Birday](https://www.github.com/m-i-n-a-r/birday), since i noticed that there isn't a similar library (at least, not a recent one). I kept it super simple and light, but I'm open to any pull request. 
