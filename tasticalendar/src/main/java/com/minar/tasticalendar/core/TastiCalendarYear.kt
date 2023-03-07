@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources
 import com.minar.tasticalendar.R
@@ -244,11 +245,27 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
      * <p>
      * This is used to display something before the number of events for each month,
      * in the year, in the form "<prefix> <events number>" (eg: "Events: 12").
-     * @param prefix String, can't be null, the prefix to add to the snackbar message.
+     * @param prefix Int, can't be null, the id of the prefix to add to the snackbar message.
+     * @param plural Boolean, false by default, if true the passed id is a plural String,
+     * which will be formatted with the number of events accordingly.
+     * @param refresh Boolean, true by default, if false the layout won't be refreshed.
      */
-    fun setSnackBarsPrefix(prefix: String) {
+    fun setSnackBarsPrefix(prefix: Int, plural: Boolean = false, refresh: Boolean = true) {
         for (month in monthList)
-            month.setSnackBarsPrefix(prefix)
+            month.setSnackBarsPrefix(prefix, plural, refresh)
+    }
+
+    /**
+     * Sets the duration for the snackbar.
+     * <p>
+     * This is used to change the default duration, set to 3000 milliseconds. Wrapper
+     * for the month function.
+     * @param duration Int, can't be null, defines the duration in milliseconds.
+     * @param refresh Boolean, true by default, if false the layout won't be refreshed.
+     */
+    fun setSnackBarsDuration(duration: Int, refresh: Boolean = true) {
+        for (month in monthList)
+            month.setSnackBarsDuration(duration, refresh)
     }
 
     /**
@@ -256,9 +273,39 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
      * <p>
      * It is used to display advanced information when a day is pressed.
      * @param enabled Boolean, can't be null, if true enables the advanced info parameter.
+     * @param refresh Boolean, true by default, if false the layout won't be refreshed.
      */
-    fun setAdvancedInfoEnabled(enabled: Boolean) {
+    fun setAdvancedInfoEnabled(enabled: Boolean, refresh: Boolean = true) {
         showAdvancedInfo = enabled
+    }
+
+    /**
+     * Sets the base view for the snackbar.
+     * <p>
+     * It can be used to avoid unwanted behaviors when a snackbar appears. For example, the snackbar
+     * will spawn below the action button by default. Wrapper for the month function.
+     * @param view View, not null, it should be the base view. If the view is invalid, the binding
+     * root will be used instead
+     * @param refresh Boolean, true by default, if false the layout won't be refreshed.
+     */
+    fun setSnackBarBaseView(view: View, refresh: Boolean = true) {
+        for (month in monthList)
+            month.setSnackBarBaseView(view, refresh)
+    }
+
+    /**
+     * Forces sunday to be displayed as the first day of the week.
+     * <p>
+     * This is used to force sunday as the first day of the week. If this method isn't called, the
+     * first day of the week is automatically taken from the default locale.
+     * @param enable Boolean, can't be null, if true sets sunday as the first day of the week
+     * for the current month.
+     * @param refresh Boolean, true by default, if false the layout won't be refreshed.
+     */
+    fun setSundayFirst(enable: Boolean, refresh: Boolean = true) {
+        if (enable != sundayFirst)
+            for (month in monthList)
+                month.setSundayFirst(enable, refresh)
     }
 
     /**

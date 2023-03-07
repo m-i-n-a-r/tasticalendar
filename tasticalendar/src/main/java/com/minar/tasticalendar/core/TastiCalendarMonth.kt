@@ -6,6 +6,7 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
+import android.util.Log
 import android.util.Range
 import android.view.LayoutInflater
 import android.view.View
@@ -50,6 +51,8 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     private var binding: TasticalendarMonthBinding
     private var eventCount = 0
     private var snackBarsPrefix = ""
+    private var snackBarsBaseView: View? = null
+    private var snackBarsDuration: Int = 3000
 
     init {
         context.theme.obtainStyledAttributes(
@@ -298,11 +301,15 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                     // Display a snackbar on tap if the text exists
                     if (snackbarText.isNotBlank()) {
                         cell.setOnClickListener {
-                            showSnackbar(snackbarText.replaceFirstChar {
-                                if (it.isLowerCase()) it.titlecase(
-                                    Locale.ROOT
-                                ) else it.toString()
-                            }, binding.root, 3000)
+                            showSnackbar(
+                                snackbarText.replaceFirstChar {
+                                    if (it.isLowerCase()) it.titlecase(
+                                        Locale.ROOT
+                                    ) else it.toString()
+                                },
+                                snackBarsBaseView ?: binding.root,
+                                snackBarsDuration
+                            )
                         }
                     }
                 }
@@ -414,7 +421,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             monthTitle.setOnClickListener {
                 val content =
                     if (snackBarsPrefix.isEmpty()) "-> $eventCount" else "$snackBarsPrefix $eventCount"
-                showSnackbar(content, binding.root)
+                showSnackbar(content, snackBarsBaseView ?: binding.root, snackBarsDuration)
             }
         }
 
@@ -486,17 +493,18 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     }
 
     /**
-     * Initializes the layout for the month, assigning the bindings and the visibilities.
+     * Forces sunday to be displayed as the first day of the week.
      * <p>
      * This is used to force sunday as the first day of the week. If this method isn't called, the
      * first day of the week is automatically taken from the default locale.
      * @param enable Boolean, can't be null, if true sets sunday as the first day of the week
      * for the current month.
+     * @param refresh Boolean, true by default, if false the layout won't be refreshed.
      */
-    fun setSundayFirst(enable: Boolean) {
+    fun setSundayFirst(enable: Boolean, refresh: Boolean = true) {
         if (enable != sundayFirst) {
             sundayFirst = enable
-            renderMonth()
+            if (refresh) renderMonth()
         }
     }
 
@@ -505,11 +513,53 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
      * <p>
      * This is used to display something before the number of events in the month,
      * in the form "<prefix> <events number>" (eg: "Events: 12").
-     * @param prefix String, can't be null, the prefix to add to the snackbar message.
+     * @param prefix Int, can't be null, the id of the prefix to add to the snackbar message.
+     * @param plural Boolean, false by default, if true the passed id is a plural String,
+     * which will be formatted with the number of events accordingly.
      */
-    fun setSnackBarsPrefix(prefix: String) {
-        snackBarsPrefix = prefix
-        renderMonth()
+    fun setSnackBarsPrefix(prefix: Int, plural: Boolean = false, refresh: Boolean = true) {
+        try {
+            if (!plural) {
+                val selectedPrefix = context.getString(prefix)
+                if (selectedPrefix.isNotEmpty())
+                    snackBarsPrefix = selectedPrefix
+            } else {
+                // TODO Manage plural
+                snackBarsPrefix = context.resources.getQuantityString(prefix, 100)
+            }
+        } catch (_: Exception) {
+            Log.e(
+                "tastiCalendar",
+                "The id for the prefix string doesn't exist in the current context"
+            )
+        }
+        if (refresh) renderMonth()
+    }
+
+    /**
+     * Sets the base view for the snackbar.
+     * <p>
+     * It can be used to avoid unwanted behaviors when a snackbar appears. For example, the snackbar
+     * will spawn below the action button by default
+     * @param view View, not null, it should be the base view. If the view is invalid, the binding
+     * root will be used instead
+     * @param refresh Boolean, true by default, if false the layout won't be refreshed.
+     */
+    fun setSnackBarBaseView(view: View, refresh: Boolean = true) {
+        snackBarsBaseView = view
+        if (refresh) renderMonth()
+    }
+
+    /**
+     * Sets the duration for the snackbar.
+     * <p>
+     * This is used to change the default duration, set to 3000 milliseconds.
+     * @param duration Int, can't be null, defines the duration in milliseconds.
+     * @param refresh Boolean, true by default, if false the layout won't be refreshed.
+     */
+    fun setSnackBarsDuration(duration: Int, refresh: Boolean = true) {
+        snackBarsDuration = duration
+        if (refresh) renderMonth()
     }
 
     /**
