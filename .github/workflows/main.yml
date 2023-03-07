@@ -1,0 +1,42 @@
+# GitHub Pages deploy action structure based on https://github.com/simonesestito/wasaphoto/blob/master/.github/workflows/public-openapi-docs.yml
+
+name: Deploy Javadoc
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project sources
+        uses: actions/checkout@v2
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Generate javadoc
+        run:  gradle dokkaHtmlMultiModule
+      - name: Redirect to the submodule directly
+        run:  echo "PCFET0NUWVBFIGh0bWw+PGh0bWw+PGhlYWQ+PG1ldGEgaHR0cC1lcXVpdj0iUmVmcmVzaCIgY29udGVudD0iMDsgdXJsPSd0YXN0aWNhbGVuZGFyL2luZGV4Lmh0bWwnIiAvPjwvaGVhZD48Ym9keT48L2JvZHk+PC9odG1sPgo=" | base64 -d > ./build/dokka/htmlMultiModule/index.html
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          # Upload public docs folder
+          path: 'build/dokka/htmlMultiModule/'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
