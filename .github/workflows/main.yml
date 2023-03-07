@@ -19,7 +19,7 @@ on:
       - master
 
 jobs:
-  publish:
+  javadoc:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout project sources
