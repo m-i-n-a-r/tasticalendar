@@ -35,7 +35,6 @@
         <attr name="tcSundayFirst" />
         <attr name="tcHideWeekDays" />
         <attr name="tcShowInfoSnackBars" />
-        <attr name="tcShowAdvancedInfo" format="boolean" />
         <attr name="tcAppearance" />
     </declare-styleable>
 </resources>

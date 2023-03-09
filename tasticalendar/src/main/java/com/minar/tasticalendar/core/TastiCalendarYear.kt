@@ -30,13 +30,13 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
     private var hideWeekDays: Boolean
     private var sundayFirst: Boolean
     private var showSnackBars: Boolean
-    private var showAdvancedInfo: Boolean
     private var appearance: Int
 
     // Other useful variables
     private var year: Int = LocalDate.now().year
     private lateinit var monthList: MutableList<TastiCalendarMonth>
     private var binding: TasticalendarYearBinding
+    private var events = mutableListOf<TastiCalendarEvent>()
 
     init {
         context.theme.obtainStyledAttributes(
@@ -46,8 +46,6 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
                 hideWeekDays = getBoolean(R.styleable.TastiCalendarYear_tcHideWeekDays, false)
                 sundayFirst = getBoolean(R.styleable.TastiCalendarYear_tcSundayFirst, false)
                 showSnackBars = getBoolean(R.styleable.TastiCalendarYear_tcShowInfoSnackBars, true)
-                showAdvancedInfo =
-                    getBoolean(R.styleable.TastiCalendarYear_tcShowAdvancedInfo, false)
                 appearance = getInteger(R.styleable.TastiCalendarYear_tcAppearance, 0)
             } finally {
                 recycle()
@@ -135,11 +133,15 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
      * latter will be ignored.
      * @see TastiCalendarEvent
      * @param year the year to render, it can't be null, but it can also be negative.
-     * @param events a list of TastiCalendarEvents, used to highlight a set of dates also adding.
-     * labels to it, if showAdvancedInfo is set to true. It can be null.
+     * @param events a list of TastiCalendarEvents, used to highlight a set of dates also adding
+     * labels to it. It can be null.
      * @param dates a simple list of dates, used to highlight a set of dates. It can be null.
      */
-    fun renderYear(year: Int, events: List<TastiCalendarEvent>?, dates: List<LocalDate>? = null) {
+    fun renderYear(
+        year: Int,
+        events: List<TastiCalendarEvent>? = null,
+        dates: List<LocalDate>? = null
+    ) {
         this.year = year
         for (month in monthList) {
             month.setYear(year)
@@ -148,48 +150,39 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
 
         // Highlight the dates (only if they exist in the current year)
         if (year == LocalDate.now().year) highlightCurrentDate()
-        if (events != null && events.isNotEmpty()) {
-            // Make sure the list is ordered
-            val orderedEvents = events.toMutableList()
-            orderedEvents.sortBy { it.date }
 
-            var currentDate = orderedEvents[0].date
-            var dayEvents = mutableListOf<TastiCalendarEvent>()
-            for (event in orderedEvents) {
-                // Compute the snackbar text if enabled (and the list is ordered)
-                if (showAdvancedInfo) {
-                    if (event.date.isEqual(currentDate.withYear(event.date.year))) {
-                        dayEvents.add(event)
-                    } else {
-                        dayEvents = mutableListOf()
-                        dayEvents.add(event)
-                        currentDate = event.date
-                    }
-                }
-                highlightDate(
-                    event.date,
-                    getThemeColor(com.google.android.material.R.attr.colorPrimary, context),
-                    AppCompatResources.getDrawable(context, R.drawable.tasticalendar_circle),
-                    makeBold = false,
-                    autoOpacity = true,
-                    autoTextColor = true,
-                    snackbarText = if (showAdvancedInfo) formatEventList(
-                        dayEvents
-                    ) else ""
-                )
+        // Unify the lists to be the same list
+        val finalList: MutableList<TastiCalendarEvent>? =
+            if (events == null || events.isEmpty()) {
+                if (dates != null && dates.isNotEmpty()) {
+                    dates.map { TastiCalendarEvent(it, "") }.toMutableList()
+                } else null
+            } else events.toMutableList()
+        if (finalList == null || finalList.isEmpty()) return
+        finalList.sortBy { it.date }
+
+        // Compute temporary lists for each day
+        var currentDate = finalList[0].date
+        var dayEvents = mutableListOf<TastiCalendarEvent>()
+        for (event in finalList) {
+            // Compute the snackbar text
+            if (event.date.isEqual(currentDate.withYear(event.date.year))) {
+                dayEvents.add(event)
+            } else {
+                dayEvents = mutableListOf()
+                dayEvents.add(event)
+                currentDate = event.date
             }
-        } else if (dates != null && dates.isNotEmpty()) {
-            // The order is important for the labels, and it's not necessary in this case
-            for (event in dates) {
-                highlightDate(
-                    event,
-                    getThemeColor(com.google.android.material.R.attr.colorPrimary, context),
-                    AppCompatResources.getDrawable(context, R.drawable.tasticalendar_circle),
-                    makeBold = false,
-                    autoOpacity = true,
-                    autoTextColor = true,
-                )
-            }
+            // Highlight the dates
+            highlightDate(
+                event.date,
+                getThemeColor(com.google.android.material.R.attr.colorPrimary, context),
+                AppCompatResources.getDrawable(context, R.drawable.tasticalendar_circle),
+                makeBold = false,
+                autoOpacity = true,
+                autoTextColor = true,
+                snackbarText = if (showSnackBars) formatEventList(dayEvents) else ""
+            )
         }
     }
 
@@ -269,14 +262,15 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
     }
 
     /**
-     * Changes the behavior of the messages displayed.
+     * Sets the property to display the snack bars on tap or not.
      * <p>
-     * It is used to display advanced information when a day is pressed.
+     * If true, it is used to display advanced information when a day or a month header is pressed.
      * @param enabled Boolean, can't be null, if true enables the advanced info parameter.
      * @param refresh Boolean, true by default, if false the layout won't be refreshed.
      */
-    fun setAdvancedInfoEnabled(enabled: Boolean, refresh: Boolean = true) {
-        showAdvancedInfo = enabled
+    fun setShowSnackBarsEnabled(enabled: Boolean, refresh: Boolean = true) {
+        showSnackBars = enabled
+        if (refresh) renderYear(year, events)
     }
 
     /**

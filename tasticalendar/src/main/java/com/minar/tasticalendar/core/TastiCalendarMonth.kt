@@ -6,14 +6,16 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.util.Range
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import com.minar.tasticalendar.R
 import com.minar.tasticalendar.databinding.TasticalendarMonthBinding
+import com.minar.tasticalendar.model.TastiCalendarEvent
+import com.minar.tasticalendar.utilities.formatEventList
 import com.minar.tasticalendar.utilities.getBestContrast
 import com.minar.tasticalendar.utilities.getThemeColor
 import com.minar.tasticalendar.utilities.showSnackbar
@@ -50,7 +52,8 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     private lateinit var monthTitle: TextView
     private var binding: TasticalendarMonthBinding
     private var eventCount = 0
-    private var snackBarsPrefix = ""
+    private var snackBarsPluralFormatting = false
+    private var snackBarsPrefix: Int? = null
     private var snackBarsBaseView: View? = null
     private var snackBarsDuration: Int = 3000
 
@@ -265,8 +268,10 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         var currentAlpha = 0
         // The textview will be hidden if the day doesn't exist in the current month
         for (cell in cellsList) {
-            if (cell.text.trim() == day.toString()) {
-                // Graphical stuff
+
+            // Check, for each cell, if it's the wanted day and it's visible
+            if (cell.text.trim() == day.toString() && cell.visibility == View.VISIBLE) {
+                // Day found, now highlight it accordingly
                 if (drawable == null) {
                     cell.setTextColor(color)
                 } else {
@@ -298,25 +303,30 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                             )
                         }
                     }
-                    // Display a snackbar on tap if the text exists
-                    if (snackbarText.isNotBlank()) {
-                        cell.setOnClickListener {
-                            showSnackbar(
-                                snackbarText.replaceFirstChar {
-                                    if (it.isLowerCase()) it.titlecase(
-                                        Locale.ROOT
-                                    ) else it.toString()
-                                },
-                                snackBarsBaseView ?: binding.root,
-                                snackBarsDuration
-                            )
-                        }
-                    }
                 }
-                // The font will change, and monospace doesn't have a bold style
+                // The font will change since monospace doesn't have a bold style
                 if (makeBold) {
+                    // This will result in a uglier layout and unaligned texts
                     cell.setTypeface(null, Typeface.BOLD)
                 }
+
+                // Display a snackbar on tap if the text exists
+                if (snackbarText.isNotBlank()) {
+                    cell.setOnClickListener {
+                        // Simply uppercase the first letter of the message, if it isn't already
+                        showSnackbar(
+                            snackbarText.replaceFirstChar {
+                                if (it.isLowerCase()) it.titlecase(
+                                    Locale.ROOT
+                                ) else it.toString()
+                            },
+                            snackBarsBaseView ?: binding.root,
+                            snackBarsDuration
+                        )
+                    }
+                }
+
+                // Break the for cycle, since the correct day has been found
                 break
             }
         }
@@ -328,9 +338,16 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
      * This reloads the entire layout and apply the current settings,
      * it's the core method of the class.
      *
-     * @param date the date with the given month or year, if null the initial date is used.
+     * @param monthDate the date with the given month or year, if null the initial date is used.
+     * @param events a list of TastiCalendarEvents, used to highlight a set of dates also adding
+     * labels to it. It can be null.
+     * @param dates a simple list of dates, used to highlight a set of dates. It can be null.
      */
-    fun renderMonth(date: LocalDate = dateWithChosenMonth) {
+    fun renderMonth(
+        monthDate: LocalDate = dateWithChosenMonth,
+        events: List<TastiCalendarEvent>? = null,
+        dates: List<LocalDate>? = null
+    ) {
         // Set the letters for the week days
         val monday = DayOfWeek.MONDAY
         val tuesday = DayOfWeek.TUESDAY
@@ -368,7 +385,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             weekDaysList[6].visibility = View.GONE
         }
         // Some resetting logic
-        if (date.year != dateWithChosenMonth.year) {
+        if (monthDate.year != dateWithChosenMonth.year) {
             eventCount = 0
             binding.tastiCalendarMonthName.setTextColor(
                 getThemeColor(
@@ -377,7 +394,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                 )
             )
         }
-        val firstDayDate = date.withDayOfMonth(1)
+        val firstDayDate = monthDate.withDayOfMonth(1)
         dateWithChosenMonth = firstDayDate
 
         // Set the number and name (capitalized) for the month (from range 0-11 to 1-12)
@@ -418,11 +435,63 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
 
         // Show snack bars on month header press
         if (showSnackBars) {
-            monthTitle.setOnClickListener {
-                val content =
-                    if (snackBarsPrefix.isEmpty()) "-> $eventCount" else "$snackBarsPrefix $eventCount"
-                showSnackbar(content, snackBarsBaseView ?: binding.root, snackBarsDuration)
+            var prefix = ""
+            try {
+                prefix = if (snackBarsPluralFormatting && snackBarsPrefix != null) {
+                    context.resources.getQuantityString(snackBarsPrefix!!, eventCount)
+                } else context.getString(snackBarsPrefix!!)
+            } catch (_: Exception) {
+                snackBarsPrefix = null
+                snackBarsPluralFormatting = false
             }
+
+            // Build the final, formatted message for the month header
+            val snackMessage = if (prefix.isNotEmpty())
+                if (snackBarsPluralFormatting) prefix
+                else "$prefix $eventCount"
+            else "-> $eventCount"
+
+            // Set the appropriate header
+            monthTitle.setOnClickListener {
+                showSnackbar(snackMessage, snackBarsBaseView ?: binding.root, snackBarsDuration)
+            }
+        } else {
+            // Else remove any click listener
+            monthTitle.setOnClickListener(null)
+        }
+
+        // Unify the lists to be the same list
+        val finalList: MutableList<TastiCalendarEvent>? =
+            if (events == null || events.isEmpty()) {
+                if (dates != null && dates.isNotEmpty()) {
+                    dates.map { TastiCalendarEvent(it, "") }.toMutableList()
+                } else null
+            } else events.toMutableList()
+        if (finalList == null || finalList.isEmpty()) return
+        finalList.sortBy { it.date }
+
+        // Highlight the events
+        var currentDate = finalList[0].date
+        var dayEvents = mutableListOf<TastiCalendarEvent>()
+        for (event in finalList) {
+            // Compute the snackbar text
+            if (event.date.isEqual(currentDate.withYear(event.date.year))) {
+                dayEvents.add(event)
+            } else {
+                dayEvents = mutableListOf()
+                dayEvents.add(event)
+                currentDate = event.date
+            }
+            // Highlight the dates
+            highlightDay(
+                event.date.dayOfMonth,
+                getThemeColor(com.google.android.material.R.attr.colorPrimary, context),
+                AppCompatResources.getDrawable(context, R.drawable.tasticalendar_circle),
+                makeBold = false,
+                autoOpacity = true,
+                autoTextColor = true,
+                snackbarText = if (showSnackBars) formatEventList(dayEvents) else ""
+            )
         }
 
         // Set the appearance (0 small default, 1 medium, 2 large, 3 xlarge)
@@ -518,21 +587,8 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
      * which will be formatted with the number of events accordingly.
      */
     fun setSnackBarsPrefix(prefix: Int, plural: Boolean = false, refresh: Boolean = true) {
-        try {
-            if (!plural) {
-                val selectedPrefix = context.getString(prefix)
-                if (selectedPrefix.isNotEmpty())
-                    snackBarsPrefix = selectedPrefix
-            } else {
-                // TODO Manage plural
-                snackBarsPrefix = context.resources.getQuantityString(prefix, 100)
-            }
-        } catch (_: Exception) {
-            Log.e(
-                "tastiCalendar",
-                "The id for the prefix string doesn't exist in the current context"
-            )
-        }
+        snackBarsPrefix = prefix
+        snackBarsPluralFormatting = plural
         if (refresh) renderMonth()
     }
 
