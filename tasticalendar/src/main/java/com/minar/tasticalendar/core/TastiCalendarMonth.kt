@@ -441,33 +441,13 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
 
         // Show snack bars on month header press
         if (showSnackBars) {
-            var prefix = ""
-            try {
-                prefix = if (snackBarsPluralFormatting && snackBarsPrefix != null) {
-                    String.format(
-                        context.resources.getQuantityString(snackBarsPrefix!!, eventCount),
-                        eventCount
-                    )
-                } else context.getString(snackBarsPrefix!!)
-            } catch (_: Exception) {
-                snackBarsPrefix = null
-                snackBarsPluralFormatting = false
-            }
-
-            // Build the final, formatted message for the month header
-            val snackMessage = if (prefix.isNotEmpty())
-                if (snackBarsPluralFormatting) prefix
-                else "$prefix $eventCount"
-            else "-> $eventCount"
-            // Capitalize the first character
-            snackMessage.replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase(Locale.ROOT)
-                else it.toString()
-            }
-
             // Set the appropriate header
             monthTitle.setOnClickListener {
-                showSnackbar(snackMessage, snackBarsBaseView ?: binding.root, snackBarsDuration)
+                showSnackbar(
+                    getSnackMessage(),
+                    snackBarsBaseView ?: binding.root,
+                    snackBarsDuration
+                )
             }
         } else {
             // Else remove any click listener
@@ -489,12 +469,12 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         var dayEvents = mutableListOf<TastiCalendarEvent>()
         for (event in finalList) {
             // Compute the snackbar text
-            if (event.date.isEqual(currentDate.withYear(event.date.year))) {
+            if (event.date.withYear(1970).isEqual(currentDate.withYear(1970))) {
                 dayEvents.add(event)
             } else {
                 dayEvents = mutableListOf()
                 dayEvents.add(event)
-                currentDate = event.date
+                currentDate = event.date.withYear(1970)
             }
             // Highlight the dates
             highlightDay(
@@ -515,6 +495,36 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             2 -> setAppearance(2)
             3 -> setAppearance(3)
         }
+    }
+
+    /**
+     * Obtains the message to display in the snackbar, dynamically
+     */
+    private fun getSnackMessage(): String {
+        var prefix = ""
+        try {
+            prefix = if (snackBarsPluralFormatting && snackBarsPrefix != null) {
+                String.format(
+                    context.resources.getQuantityString(snackBarsPrefix!!, eventCount),
+                    eventCount
+                )
+            } else context.getString(snackBarsPrefix!!)
+        } catch (_: Exception) {
+            snackBarsPrefix = null
+            snackBarsPluralFormatting = false
+        }
+
+        // Build the final, formatted message for the month header
+        val snackMessage = if (prefix.isNotEmpty())
+            if (snackBarsPluralFormatting) prefix
+            else "$prefix $eventCount"
+        else "-> $eventCount"
+        // Capitalize the first character
+        snackMessage.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(Locale.ROOT)
+            else it.toString()
+        }
+        return snackMessage
     }
 
     /**

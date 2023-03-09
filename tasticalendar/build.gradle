@@ -56,7 +56,7 @@ publishing {
         release(MavenPublication) {
             groupId = 'com.github.m-i-n-a-r'
             artifactId = 'tasticalendar'
-            version = '1.2.1'
+            version = '1.2.2'
 
             afterEvaluate {
                 from components.release
