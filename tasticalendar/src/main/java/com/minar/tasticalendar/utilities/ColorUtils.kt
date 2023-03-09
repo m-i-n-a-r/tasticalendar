@@ -19,7 +19,7 @@ fun getBestContrast(color: Int, context: Context, alpha: Int = 255, isDark: Bool
         (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255
     // Return black for bright colors, white for dark colors
     return if (alpha < 80) {
-        getThemeColor(com.google.android.material.R.attr.colorSurface, context)
+        getThemeColor(com.google.android.material.R.attr.colorOnSurface, context)
     } else
         if (luma > 0.5) {
             // Brighter color, darker text

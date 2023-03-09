@@ -11,5 +11,7 @@ fun showSnackbar(
 ) {
     val snackbar = Snackbar.make(baseView, content, duration)
     snackbar.isGestureInsetBottomIgnored = true
+    // Anchor the snackbar to the desired view
+    snackbar.anchorView = baseView
     snackbar.show()
 }

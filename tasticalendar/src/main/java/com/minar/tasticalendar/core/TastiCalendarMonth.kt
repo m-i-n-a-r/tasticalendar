@@ -238,8 +238,9 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
      *
      * @param day Int and not null, represents the day to highlight. If the month
      * doesn't have the day, nothing will be highlighted.
-     * @param color the color used to highlight the month, if no drawable is specified.
-     * by default of the library, is taken from the system.
+     * @param color the color used to highlight the month, used on the text itself
+     * if no drawable is specified.
+     * By default of the library, it's taken from the system.
      * @param drawable a drawable used as background, replacing the default colored circle.
      * It can be null.
      * @param makeBold Boolean, false by default, if true the day text will be in bold style. It has some problems,
@@ -273,6 +274,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             if (cell.text.trim() == day.toString() && cell.visibility == View.VISIBLE) {
                 // Day found, now highlight it accordingly
                 if (drawable == null) {
+                    // No drawable, color the text
                     cell.setTextColor(color)
                 } else {
                     // Use the drawable as background or foreground
@@ -292,13 +294,17 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                             if (currentAlpha > 185) cell.background.alpha = 255
                             else cell.background.alpha = currentAlpha + 70
                         } else cell.background.alpha = 255
+
+                        // Apply the automatic text color if requested
                         if (autoTextColor) {
                             cell.setTextColor(
                                 getBestContrast(
                                     color,
                                     context,
                                     cell.background.alpha,
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) resources.configuration.isNightModeActive else null
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+                                        resources.configuration.isNightModeActive
+                                    else null
                                 )
                             )
                         }
@@ -438,7 +444,10 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             var prefix = ""
             try {
                 prefix = if (snackBarsPluralFormatting && snackBarsPrefix != null) {
-                    context.resources.getQuantityString(snackBarsPrefix!!, eventCount)
+                    String.format(
+                        context.resources.getQuantityString(snackBarsPrefix!!, eventCount),
+                        eventCount
+                    )
                 } else context.getString(snackBarsPrefix!!)
             } catch (_: Exception) {
                 snackBarsPrefix = null
@@ -450,6 +459,11 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                 if (snackBarsPluralFormatting) prefix
                 else "$prefix $eventCount"
             else "-> $eventCount"
+            // Capitalize the first character
+            snackMessage.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale.ROOT)
+                else it.toString()
+            }
 
             // Set the appropriate header
             monthTitle.setOnClickListener {
