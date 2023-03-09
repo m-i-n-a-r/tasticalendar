@@ -462,7 +462,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                 } else null
             } else events.toMutableList()
         if (finalList == null || finalList.isEmpty()) return
-        finalList.sortBy { it.date }
+        finalList.sortBy { it.date.withYear(1970) }
 
         // Highlight the events
         var currentDate = finalList[0].date
@@ -520,11 +520,11 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             else "$prefix $eventCount"
         else "-> $eventCount"
         // Capitalize the first character
-        snackMessage.replaceFirstChar {
+        val capitalizedMessage = snackMessage.replaceFirstChar {
             if (it.isLowerCase()) it.titlecase(Locale.ROOT)
             else it.toString()
         }
-        return snackMessage
+        return capitalizedMessage
     }
 
     /**

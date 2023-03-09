@@ -159,7 +159,7 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
                 } else null
             } else events.toMutableList()
         if (finalList == null || finalList.isEmpty()) return
-        finalList.sortBy { it.date }
+        finalList.sortBy { it.date.withYear(1970) }
 
         // Compute temporary lists for each day
         var currentDate = finalList[0].date
@@ -221,6 +221,9 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
         snackbarText: String = ""
     ) {
         if (date == null) return
+        // Since we have the full date, check if the event should be considered in the current year
+        if (date.year > year) return
+        // Actually highlight the date
         monthList[date.month.value - 1].highlightDay(
             date.dayOfMonth,
             color,
