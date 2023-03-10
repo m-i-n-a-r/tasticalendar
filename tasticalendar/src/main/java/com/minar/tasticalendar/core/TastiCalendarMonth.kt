@@ -392,21 +392,19 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                     weekDaysList[sundayIndex].setTypeface(null, Typeface.NORMAL)
                     weekDaysList[sundayIndex].setTextColor(
                         getThemeColor(
-                            com.google.android.material.R.attr.colorOnBackground,
+                            com.google.android.material.R.attr.colorOnSurfaceVariant,
                             context
                         )
                     )
-                    weekDaysList[sundayIndex].alpha = .85f
                 }
                 1 -> {
                     weekDaysList[sundayIndex].setTypeface(null, Typeface.BOLD)
                     weekDaysList[sundayIndex].setTextColor(
                         getThemeColor(
-                            com.google.android.material.R.attr.colorOnBackground,
+                            com.google.android.material.R.attr.colorOnSurfaceVariant,
                             context
                         )
                     )
-                    weekDaysList[sundayIndex].alpha = .85f
                 }
                 2 -> {
                     weekDaysList[sundayIndex].setTypeface(null, Typeface.NORMAL)
