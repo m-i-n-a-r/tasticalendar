@@ -29,7 +29,7 @@
             android:padding="@dimen/calendar_month_day_padding"
             android:text="@string/tc_unknown"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="?attr/colorOnSurfaceVariant" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:padding="@dimen/calendar_month_day_padding"
             android:text="@string/tc_unknown"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="?attr/colorOnSurfaceVariant" />
 
         <TextView
@@ -51,7 +51,7 @@
             android:padding="@dimen/calendar_month_day_padding"
             android:text="@string/tc_unknown"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="?attr/colorOnSurfaceVariant" />
 
         <TextView
@@ -62,7 +62,7 @@
             android:padding="@dimen/calendar_month_day_padding"
             android:text="@string/tc_unknown"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="?attr/colorOnSurfaceVariant" />
 
         <TextView
@@ -73,7 +73,7 @@
             android:padding="@dimen/calendar_month_day_padding"
             android:text="@string/tc_unknown"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="?attr/colorOnSurfaceVariant" />
 
         <TextView
@@ -84,7 +84,7 @@
             android:padding="@dimen/calendar_month_day_padding"
             android:text="@string/tc_unknown"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="?attr/colorOnSurfaceVariant" />
 
         <TextView
@@ -95,7 +95,7 @@
             android:padding="@dimen/calendar_month_day_padding"
             android:text="@string/tc_unknown"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             android:textColor="?attr/colorOnSurfaceVariant" />
 
         <TextView
