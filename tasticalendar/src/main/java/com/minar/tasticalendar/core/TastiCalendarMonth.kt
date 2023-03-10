@@ -58,6 +58,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     private var snackBarsPrefix: Int? = null
     private var snackBarsBaseView: View? = null
     private var snackBarsDuration: Int = 3000
+    private var sundayIndex = 6
 
     init {
         context.theme.obtainStyledAttributes(
@@ -367,7 +368,6 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         val sunday = DayOfWeek.SUNDAY
         val locale = Locale.getDefault()
         if (!hideWeekDays) {
-            var sundayIndex = 6
             if (!sundayFirst) {
                 weekDaysList[0].text = monday.getDisplayName(TextStyle.NARROW, locale)
                 weekDaysList[1].text = tuesday.getDisplayName(TextStyle.NARROW, locale)
@@ -385,45 +385,6 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                 weekDaysList[4].text = thursday.getDisplayName(TextStyle.NARROW, locale)
                 weekDaysList[5].text = friday.getDisplayName(TextStyle.NARROW, locale)
                 weekDaysList[6].text = saturday.getDisplayName(TextStyle.NARROW, locale)
-            }
-            // Set the highlighting style for sunday
-            when (sundayAppearance) {
-                0 -> {
-                    weekDaysList[sundayIndex].setTypeface(null, Typeface.NORMAL)
-                    weekDaysList[sundayIndex].setTextColor(
-                        getThemeColor(
-                            com.google.android.material.R.attr.colorOnSurfaceVariant,
-                            context
-                        )
-                    )
-                }
-                1 -> {
-                    weekDaysList[sundayIndex].setTypeface(null, Typeface.BOLD)
-                    weekDaysList[sundayIndex].setTextColor(
-                        getThemeColor(
-                            com.google.android.material.R.attr.colorOnSurfaceVariant,
-                            context
-                        )
-                    )
-                }
-                2 -> {
-                    weekDaysList[sundayIndex].setTypeface(null, Typeface.NORMAL)
-                    weekDaysList[sundayIndex].setTextColor(
-                        getThemeColor(
-                            com.google.android.material.R.attr.colorTertiary,
-                            context
-                        )
-                    )
-                }
-                3 -> {
-                    weekDaysList[sundayIndex].setTypeface(null, Typeface.BOLD)
-                    weekDaysList[sundayIndex].setTextColor(
-                        getThemeColor(
-                            com.google.android.material.R.attr.colorTertiary,
-                            context
-                        )
-                    )
-                }
             }
         } else {
             weekDaysList[0].visibility = View.GONE
@@ -781,5 +742,45 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             )
         )
         for (weekDay in weekDaysList) weekDay.alpha = .85f
+
+        // Set the highlighting style for sunday
+        when (sundayAppearance) {
+            0 -> {
+                weekDaysList[sundayIndex].setTypeface(null, Typeface.NORMAL)
+                weekDaysList[sundayIndex].setTextColor(
+                    getThemeColor(
+                        com.google.android.material.R.attr.colorOnSurfaceVariant,
+                        context
+                    )
+                )
+            }
+            1 -> {
+                weekDaysList[sundayIndex].setTypeface(null, Typeface.BOLD)
+                weekDaysList[sundayIndex].setTextColor(
+                    getThemeColor(
+                        com.google.android.material.R.attr.colorOnSurfaceVariant,
+                        context
+                    )
+                )
+            }
+            2 -> {
+                weekDaysList[sundayIndex].setTypeface(null, Typeface.NORMAL)
+                weekDaysList[sundayIndex].setTextColor(
+                    getThemeColor(
+                        com.google.android.material.R.attr.colorTertiary,
+                        context
+                    )
+                )
+            }
+            3 -> {
+                weekDaysList[sundayIndex].setTypeface(null, Typeface.BOLD)
+                weekDaysList[sundayIndex].setTextColor(
+                    getThemeColor(
+                        com.google.android.material.R.attr.colorTertiary,
+                        context
+                    )
+                )
+            }
+        }
     }
 }
