@@ -392,7 +392,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                     weekDaysList[sundayIndex].setTypeface(null, Typeface.NORMAL)
                     weekDaysList[sundayIndex].setTextColor(
                         getThemeColor(
-                            com.google.android.material.R.attr.colorOnPrimary,
+                            com.google.android.material.R.attr.colorOnBackground,
                             context
                         )
                     )
@@ -401,7 +401,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                     weekDaysList[sundayIndex].setTypeface(null, Typeface.BOLD)
                     weekDaysList[sundayIndex].setTextColor(
                         getThemeColor(
-                            com.google.android.material.R.attr.colorOnPrimary,
+                            com.google.android.material.R.attr.colorOnBackground,
                             context
                         )
                     )
@@ -589,7 +589,9 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                     cell.setTextColor(textColor)
                 }
                 for (day in weekDaysList) {
+                    val textColor = day.currentTextColor
                     day.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_LabelMedium)
+                    day.setTextColor(textColor)
                 }
                 monthTitle.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyMedium)
             }
@@ -602,7 +604,9 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                     cell.setTextColor(textColor)
                 }
                 for (day in weekDaysList) {
+                    val textColor = day.currentTextColor
                     day.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyMedium)
+                    day.setTextColor(textColor)
                 }
                 monthTitle.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyLarge)
             }
@@ -615,7 +619,9 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                     cell.setTextColor(textColor)
                 }
                 for (day in weekDaysList) {
+                    val textColor = day.currentTextColor
                     day.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyLarge)
+                    day.setTextColor(textColor)
                 }
                 monthTitle.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_HeadlineSmall)
             }
@@ -628,7 +634,9 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                     cell.setTextColor(textColor)
                 }
                 for (day in weekDaysList) {
+                    val textColor = day.currentTextColor
                     day.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_HeadlineMedium)
+                    day.setTextColor(textColor)
                 }
                 monthTitle.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_HeadlineLarge)
             }
@@ -666,6 +674,19 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             sundayFirst = enable
             if (refresh) renderMonth()
         }
+    }
+
+    /**
+     * Sets the weekdays row visibility.
+     * <p>
+     * This is used to show or hide the weekdays row. Useful to obtain compact layouts.
+     * @param enable Boolean, can't be null, if true hides the week days row
+     * for the current month.
+     * @param refresh Boolean, true by default, if false the layout won't be refreshed.
+     */
+    fun setHideWeekDays(enable: Boolean, refresh: Boolean = true) {
+        if (enable != hideWeekDays) hideWeekDays = enable
+        if (refresh) renderMonth()
     }
 
     /**

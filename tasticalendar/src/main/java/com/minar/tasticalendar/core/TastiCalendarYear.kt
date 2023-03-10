@@ -46,7 +46,7 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
         ).apply {
             try {
                 hideWeekDays = getBoolean(R.styleable.TastiCalendarYear_tcHideWeekDays, false)
-                sundayHighlight = getInteger(R.styleable.TastiCalendarMonth_tcSundayHighlight, 1)
+                sundayHighlight = getInteger(R.styleable.TastiCalendarMonth_tcSundayHighlight, 0)
                 sundayFirst = getBoolean(R.styleable.TastiCalendarYear_tcSundayFirst, false)
                 showSnackBars = getBoolean(R.styleable.TastiCalendarYear_tcShowInfoSnackBars, true)
                 appearance = getInteger(R.styleable.TastiCalendarYear_tcAppearance, 0)
@@ -94,16 +94,20 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
             december
         )
 
-        // Sunday related settings
-        when (sundayHighlight) {
-            0 -> for (month in monthList) month.setSundayHighlight(TcSundayHighlight.NONE)
-            1 -> for (month in monthList) month.setSundayHighlight(TcSundayHighlight.BOLD)
-            2 -> for (month in monthList) month.setSundayHighlight(TcSundayHighlight.COLORED)
-            3 -> for (month in monthList) month.setSundayHighlight(TcSundayHighlight.BOLDCOLORED)
-        }
+        // This has to be done nevertheless, since it affects the numbers
         if (WeekFields.of(Locale.getDefault()).firstDayOfWeek.name == "SUNDAY") {
             for (month in monthList) {
                 month.setSundayFirst(true)
+            }
+        }
+        // Sunday highlighting
+        if (hideWeekDays) setHideWeekDays(true)
+        else {
+            when (sundayHighlight) {
+                0 -> for (month in monthList) month.setSundayHighlight(TcSundayHighlight.NONE)
+                1 -> for (month in monthList) month.setSundayHighlight(TcSundayHighlight.BOLD)
+                2 -> for (month in monthList) month.setSundayHighlight(TcSundayHighlight.COLORED)
+                3 -> for (month in monthList) month.setSundayHighlight(TcSundayHighlight.BOLDCOLORED)
             }
         }
 
@@ -291,7 +295,7 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
      * It can be used to avoid unwanted behaviors when a snackbar appears. For example, the snackbar
      * will spawn below the action button by default. Wrapper for the month function.
      * @param view View, not null, it should be the base view. If the view is invalid, the binding
-     * root will be used instead
+     * root will be used instead.
      * @param refresh Boolean, true by default, if false the layout won't be refreshed.
      */
     fun setSnackBarBaseView(view: View, refresh: Boolean = true) {
@@ -305,7 +309,7 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
      * This is used to force sunday as the first day of the week. If this method isn't called, the
      * first day of the week is automatically taken from the default locale.
      * @param appearance Enum of type TcAppearance, can't be null, specifies the selected
-     * highlighting type
+     * highlighting type for each month in the year.
      * @param refresh Boolean, true by default, if false the layout won't be refreshed.
      * @see TcSundayHighlight
      */
@@ -315,17 +319,31 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
     }
 
     /**
-     * Selects an highlighting strategy for sunday, if needed
+     * Selects an highlighting strategy for sunday, if needed.
      * <p>
      * This is used to change the appearance of the sunday "S" in each month
      * @param enable Boolean, can't be null, if true sets sunday as the first day of the week
-     * for the current month.
+     * for each month in the year.
      * @param refresh Boolean, true by default, if false the layout won't be refreshed.
      */
     fun setSundayFirst(enable: Boolean, refresh: Boolean = true) {
         if (enable != sundayFirst)
             for (month in monthList)
                 month.setSundayFirst(enable, refresh)
+    }
+
+    /**
+     * Sets the weekdays row visibility.
+     * <p>
+     * This is used to show or hide the weekdays row. Useful to obtain compact layouts.
+     * @param enable Boolean, can't be null, if true hides the week days row
+     * for each month in the year.
+     * @param refresh Boolean, true by default, if false the layout won't be refreshed.
+     */
+    fun setHideWeekDays(enable: Boolean, refresh: Boolean = true) {
+        if (enable != hideWeekDays)
+            for (month in monthList)
+                month.setHideWeekDays(enable, refresh)
     }
 
     /**
