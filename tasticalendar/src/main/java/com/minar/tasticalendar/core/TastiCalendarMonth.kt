@@ -396,6 +396,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                             context
                         )
                     )
+                    weekDaysList[sundayIndex].alpha = .85f
                 }
                 1 -> {
                     weekDaysList[sundayIndex].setTypeface(null, Typeface.BOLD)
@@ -405,6 +406,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                             context
                         )
                     )
+                    weekDaysList[sundayIndex].alpha = .85f
                 }
                 2 -> {
                     weekDaysList[sundayIndex].setTypeface(null, Typeface.NORMAL)
