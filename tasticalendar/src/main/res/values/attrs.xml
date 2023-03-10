@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="tcSundayFirst" format="boolean" />
+    <attr name="tcSundayHighlight" format="enum">
+        <enum name="none" value="0" />
+        <enum name="bold" value="1" />
+        <enum name="colored" value="2" />
+        <enum name="boldColored" value="3" />
+    </attr>
     <attr name="tcHideWeekDays" format="boolean" />
     <attr name="tcShowInfoSnackBars" format="boolean" />
     <attr name="tcAppearance" format="enum">
@@ -12,6 +18,7 @@
 
     <declare-styleable name="TastiCalendarMonth">
         <attr name="tcSundayFirst" />
+        <attr name="tcSundayHighlight" />
         <attr name="tcHideWeekDays" />
         <attr name="tcMonth" format="enum">
             <enum name="january" value="0" />
@@ -33,6 +40,7 @@
 
     <declare-styleable name="TastiCalendarYear">
         <attr name="tcSundayFirst" />
+        <attr name="tcSundayHighlight" />
         <attr name="tcHideWeekDays" />
         <attr name="tcShowInfoSnackBars" />
         <attr name="tcAppearance" />

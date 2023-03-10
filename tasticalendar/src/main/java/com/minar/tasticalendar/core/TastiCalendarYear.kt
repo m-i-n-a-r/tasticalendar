@@ -10,6 +10,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.minar.tasticalendar.R
 import com.minar.tasticalendar.databinding.TasticalendarYearBinding
 import com.minar.tasticalendar.model.TastiCalendarEvent
+import com.minar.tasticalendar.model.TcSundayHighlight
 import com.minar.tasticalendar.utilities.formatEventList
 import com.minar.tasticalendar.utilities.getThemeColor
 import java.time.LocalDate
@@ -28,6 +29,7 @@ import java.util.*
 class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
     // Custom attributes
     private var hideWeekDays: Boolean
+    private var sundayHighlight = 0
     private var sundayFirst: Boolean
     private var showSnackBars: Boolean
     private var appearance: Int
@@ -44,6 +46,7 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
         ).apply {
             try {
                 hideWeekDays = getBoolean(R.styleable.TastiCalendarYear_tcHideWeekDays, false)
+                sundayHighlight = getInteger(R.styleable.TastiCalendarMonth_tcSundayHighlight, 1)
                 sundayFirst = getBoolean(R.styleable.TastiCalendarYear_tcSundayFirst, false)
                 showSnackBars = getBoolean(R.styleable.TastiCalendarYear_tcShowInfoSnackBars, true)
                 appearance = getInteger(R.styleable.TastiCalendarYear_tcAppearance, 0)
@@ -91,7 +94,13 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
             december
         )
 
-        // If sunday is the first day, apply this
+        // Sunday related settings
+        when (sundayHighlight) {
+            0 -> for (month in monthList) month.setSundayHighlight(TcSundayHighlight.NONE)
+            1 -> for (month in monthList) month.setSundayHighlight(TcSundayHighlight.BOLD)
+            2 -> for (month in monthList) month.setSundayHighlight(TcSundayHighlight.COLORED)
+            3 -> for (month in monthList) month.setSundayHighlight(TcSundayHighlight.BOLDCOLORED)
+        }
         if (WeekFields.of(Locale.getDefault()).firstDayOfWeek.name == "SUNDAY") {
             for (month in monthList) {
                 month.setSundayFirst(true)
@@ -295,6 +304,20 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
      * <p>
      * This is used to force sunday as the first day of the week. If this method isn't called, the
      * first day of the week is automatically taken from the default locale.
+     * @param appearance Enum of type TcAppearance, can't be null, specifies the selected
+     * highlighting type
+     * @param refresh Boolean, true by default, if false the layout won't be refreshed.
+     * @see TcSundayHighlight
+     */
+    fun setSundayHighlight(appearance: TcSundayHighlight, refresh: Boolean = true) {
+        for (month in monthList)
+            month.setSundayHighlight(appearance, refresh)
+    }
+
+    /**
+     * Selects an highlighting strategy for sunday, if needed
+     * <p>
+     * This is used to change the appearance of the sunday "S" in each month
      * @param enable Boolean, can't be null, if true sets sunday as the first day of the week
      * for the current month.
      * @param refresh Boolean, true by default, if false the layout won't be refreshed.
@@ -312,6 +335,7 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
      * the function of TastiCalendarMonth.
      * @param appearance Int, can't be null, 0 means small, 1 medium, 2 large, 3 extra large.
      * Every other value is ignored.
+     * @return the appearance set, useful in case of cycling
      */
     fun setAppearance(appearance: Int): Int {
         if (appearance > 3 || appearance < 0) {

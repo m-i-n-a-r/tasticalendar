@@ -15,6 +15,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.minar.tasticalendar.R
 import com.minar.tasticalendar.databinding.TasticalendarMonthBinding
 import com.minar.tasticalendar.model.TastiCalendarEvent
+import com.minar.tasticalendar.model.TcSundayHighlight
 import com.minar.tasticalendar.utilities.formatEventList
 import com.minar.tasticalendar.utilities.getBestContrast
 import com.minar.tasticalendar.utilities.getThemeColor
@@ -41,6 +42,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     // Custom attributes
     private var month = 0
     private var hideWeekDays: Boolean
+    private var sundayAppearance = 0
     private var sundayFirst: Boolean
     private var showSnackBars: Boolean
     private var appearance = 0
@@ -64,6 +66,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             try {
                 month = getInteger(R.styleable.TastiCalendarMonth_tcMonth, 0)
                 hideWeekDays = getBoolean(R.styleable.TastiCalendarMonth_tcHideWeekDays, false)
+                sundayAppearance = getInteger(R.styleable.TastiCalendarMonth_tcSundayHighlight, 0)
                 sundayFirst = getBoolean(R.styleable.TastiCalendarMonth_tcSundayFirst, false)
                 showSnackBars = getBoolean(R.styleable.TastiCalendarMonth_tcShowInfoSnackBars, true)
                 appearance = getInteger(R.styleable.TastiCalendarMonth_tcAppearance, 0)
@@ -364,6 +367,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         val sunday = DayOfWeek.SUNDAY
         val locale = Locale.getDefault()
         if (!hideWeekDays) {
+            var sundayIndex = 6
             if (!sundayFirst) {
                 weekDaysList[0].text = monday.getDisplayName(TextStyle.NARROW, locale)
                 weekDaysList[1].text = tuesday.getDisplayName(TextStyle.NARROW, locale)
@@ -373,6 +377,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                 weekDaysList[5].text = saturday.getDisplayName(TextStyle.NARROW, locale)
                 weekDaysList[6].text = sunday.getDisplayName(TextStyle.NARROW, locale)
             } else {
+                sundayIndex = 0
                 weekDaysList[0].text = sunday.getDisplayName(TextStyle.NARROW, locale)
                 weekDaysList[1].text = monday.getDisplayName(TextStyle.NARROW, locale)
                 weekDaysList[2].text = tuesday.getDisplayName(TextStyle.NARROW, locale)
@@ -380,6 +385,45 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                 weekDaysList[4].text = thursday.getDisplayName(TextStyle.NARROW, locale)
                 weekDaysList[5].text = friday.getDisplayName(TextStyle.NARROW, locale)
                 weekDaysList[6].text = saturday.getDisplayName(TextStyle.NARROW, locale)
+            }
+            // Set the highlighting style for sunday
+            when (sundayAppearance) {
+                0 -> {
+                    weekDaysList[sundayIndex].setTypeface(null, Typeface.NORMAL)
+                    weekDaysList[sundayIndex].setTextColor(
+                        getThemeColor(
+                            com.google.android.material.R.attr.colorOnPrimary,
+                            context
+                        )
+                    )
+                }
+                1 -> {
+                    weekDaysList[sundayIndex].setTypeface(null, Typeface.BOLD)
+                    weekDaysList[sundayIndex].setTextColor(
+                        getThemeColor(
+                            com.google.android.material.R.attr.colorOnPrimary,
+                            context
+                        )
+                    )
+                }
+                2 -> {
+                    weekDaysList[sundayIndex].setTypeface(null, Typeface.NORMAL)
+                    weekDaysList[sundayIndex].setTextColor(
+                        getThemeColor(
+                            com.google.android.material.R.attr.colorTertiary,
+                            context
+                        )
+                    )
+                }
+                3 -> {
+                    weekDaysList[sundayIndex].setTypeface(null, Typeface.BOLD)
+                    weekDaysList[sundayIndex].setTextColor(
+                        getThemeColor(
+                            com.google.android.material.R.attr.colorTertiary,
+                            context
+                        )
+                    )
+                }
             }
         } else {
             weekDaysList[0].visibility = View.GONE
@@ -538,9 +582,11 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         when (appearance) {
             0 -> {
                 for (cell in cellsList) {
+                    val textColor = cell.currentTextColor
                     cell.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_LabelMedium)
                     cell.setPadding(3, 3, 3, 3)
                     cell.typeface = Typeface.MONOSPACE
+                    cell.setTextColor(textColor)
                 }
                 for (day in weekDaysList) {
                     day.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_LabelMedium)
@@ -549,9 +595,11 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             }
             1 -> {
                 for (cell in cellsList) {
+                    val textColor = cell.currentTextColor
                     cell.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyMedium)
                     cell.setPadding(8, 8, 8, 8)
                     cell.typeface = Typeface.MONOSPACE
+                    cell.setTextColor(textColor)
                 }
                 for (day in weekDaysList) {
                     day.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyMedium)
@@ -560,9 +608,11 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             }
             2 -> {
                 for (cell in cellsList) {
+                    val textColor = cell.currentTextColor
                     cell.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyLarge)
                     cell.setPadding(12, 12, 12, 12)
                     cell.typeface = Typeface.MONOSPACE
+                    cell.setTextColor(textColor)
                 }
                 for (day in weekDaysList) {
                     day.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyLarge)
@@ -571,9 +621,11 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             }
             3 -> {
                 for (cell in cellsList) {
+                    val textColor = cell.currentTextColor
                     cell.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_HeadlineMedium)
                     cell.setPadding(16, 16, 16, 16)
                     cell.typeface = Typeface.MONOSPACE
+                    cell.setTextColor(textColor)
                 }
                 for (day in weekDaysList) {
                     day.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_HeadlineMedium)
@@ -583,6 +635,21 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             else -> return
         }
         colorize()
+    }
+
+    /**
+     * Forces sunday to be displayed as the first day of the week.
+     * <p>
+     * This is used to force sunday as the first day of the week. If this method isn't called, the
+     * first day of the week is automatically taken from the default locale.
+     * @param appearance Enum of type TcAppearance, can't be null, specifies the selected
+     * highlighting type
+     * @param refresh Boolean, true by default, if false the layout won't be refreshed.
+     * @see TcSundayHighlight
+     */
+    fun setSundayHighlight(appearance: TcSundayHighlight, refresh: Boolean = true) {
+        sundayAppearance = appearance.ordinal
+        if (refresh) renderMonth()
     }
 
     /**
