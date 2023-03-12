@@ -30,7 +30,7 @@ I wrote this library starting from a piece of [Birday](https://www.github.com/m-
   <img src='https://i.imgur.com/3k8buMR.jpg' width='90%'/><br>
   Monet support examples<br><br><br>
   <img src='https://i.imgur.com/ENyIwMJ.jpg' width='90%'/><br>
-  3 of the four availables scale factors<br><br><br>
+  3 of the four available scale factors<br><br><br>
 </p>
 
 - Super lightweight
