@@ -13,8 +13,8 @@ A simple library, based on Material You, to implement a monthly or yearly calend
 [Read the docs!](https://m-i-n-a-r.github.io/tasticalendar/)
 
 ## Introduction
-I wrote this library starting from a piece of [Birday](https://www.github.com/m-i-n-a-r/birday), since i noticed that there isn't a similar library (at least, not a recent one). I kept it super simple and light, but I'm open to any pull request. 
-**Important**: this library is provided as is, no updates are guaranteed since i have other projects to focus on. It works (i use it personally in 2 projects) and is quite complete in my opinion, but I'm open to any criticism. This library doesn't need any translation since it doesn't use any string itself.
+I wrote this library starting from a piece of [Birday](https://www.github.com/m-i-n-a-r/birday), since I noticed that there isn't a similar library (at least, not a recent one). I kept it super simple and light, but I'm open to any pull request. 
+**Important**: this library is provided as is, no updates are guaranteed since I have other projects to focus on. It works (I use it personally in 2 projects) and is quite complete in my opinion, but I'm open to any criticism. This library doesn't need any translation since it doesn't use any strings itself.
 
 ## How to use
 1. Open the ```build.gradle (Project level)``` and, under repositories, make sure to have:\
