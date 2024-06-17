@@ -10,26 +10,27 @@ A simple library, based on Material You, to implement a monthly or yearly calend
   </a>
 </p>
 
-[Read the docs!](https://m-i-n-a-r.github.io/tasticalendar/)
-
 ## Introduction
-I wrote this library starting from a piece of [Birday](https://www.github.com/m-i-n-a-r/birday), since i noticed that there isn't a similar library (at least, not a recent one). I kept it super simple and light, but I'm open to any pull request. 
-**Important**: this library is provided as is, no updates are guaranteed since i have other projects to focus on. It works (i use it personally in 2 projects) and is quite complete in my opinion, but I'm open to any criticism. This library doesn't need any translation since it doesn't use any string itself.
+I wrote this library starting from a piece of [Birday](https://www.github.com/m-i-n-a-r/birday), since I noticed that there isn't a similar library (at least, not a recent one). I kept it super simple and light, but I'm open to any pull request. 
+**Important**: this library is provided as is, no updates are guaranteed since I have other projects to focus on. It works (I use it personally in 2 projects) and is quite complete in my opinion, but I'm open to any criticism. This library doesn't need any translation since it doesn't use any strings itself.
 
 ## How to use
 1. Open the ```build.gradle (Project level)``` and, under repositories, make sure to have:\
 ```maven { url "https://jitpack.io" }```
 
 2. Open the ```build.gradle (Module:app)``` file of your app, and under dependencies, add:\
-``` implementation 'com.github.m-i-n-a-r:tasticalendar:1.1.0' ```
+``` implementation 'com.github.m-i-n-a-r:tasticalendar:1.3.5' ```
 
 3. Sync Gradle, and you're good to go!
 
-Further instructions and examples will come with future releases, since there's still something to add. 
+4. A simple example of use can be found in my Birday app, in [this file](https://github.com/m-i-n-a-r/birday/blob/master/app/src/main/java/com/minar/birday/fragments/OverviewFragment.kt) and in the corresponding [layout](https://github.com/m-i-n-a-r/birday/blob/master/app/src/main/res/layout/fragment_overview.xml). Or, you can [read the docs!](https://m-i-n-a-r.github.io/tasticalendar/)
 
 ## Features
 <p align='center'>
-  <img src='https://i.imgur.com/Zc0exjT.png' width='50%'/>
+  <img src='https://i.imgur.com/3k8buMR.jpg' width='90%'/><br>
+  Monet support examples<br><br><br>
+  <img src='https://i.imgur.com/ENyIwMJ.jpg' width='90%'/><br>
+  3 of the four available scale factors<br><br><br>
 </p>
 
 - Super lightweight
@@ -37,6 +38,8 @@ Further instructions and examples will come with future releases, since there's 
 - Month layout (with different scales)
 - Year layout (adaptive depending on the month scale factor)
 - Clickable days, clickable month titles
+- Disable weekdays, different sunday highlight strategies
+- Automatic or manual "sunday as first day of the week" 
 - Easily set any property or render a different year/month
 - Easily pass a collection of dates or TastiCalendarEvent objects to highlight a set of dates on a month
 - The library chooses the best contrast for the text color when a day is highlighted
