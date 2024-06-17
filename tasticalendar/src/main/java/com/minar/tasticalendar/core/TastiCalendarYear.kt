@@ -166,12 +166,12 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
 
         // Unify the lists to be the same list
         val finalList: MutableList<TastiCalendarEvent>? =
-            if (events == null || events.isEmpty()) {
-                if (dates != null && dates.isNotEmpty()) {
+            if (events.isNullOrEmpty()) {
+                if (!dates.isNullOrEmpty()) {
                     dates.map { TastiCalendarEvent(it, "") }.toMutableList()
                 } else null
             } else events.toMutableList()
-        if (finalList == null || finalList.isEmpty()) return
+        if (finalList.isNullOrEmpty()) return
         finalList.sortBy { it.date.withYear(1970) }
 
         // Compute temporary lists for each day

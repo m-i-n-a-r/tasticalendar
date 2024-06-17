@@ -188,6 +188,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
     private fun renderDays(monthRange: Range<Int>) {
         val min = monthRange.lower
         val max = monthRange.upper
+        val emptyString = ""
 
         // Render the month numbers with a leading space for single digit numbers
         for (i in min..max) {
@@ -209,26 +210,26 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         // Hide unnecessary cells, also resetting the text to avoid false positive when highlighting
         if (min != 0) for (i in 0 until min) {
             cellsList[i].visibility = View.INVISIBLE
-            cellsList[i].text = ""
+            cellsList[i].text = emptyString
         }
         when (dateWithChosenMonth.month) {
             Month.NOVEMBER, Month.APRIL, Month.JUNE, Month.SEPTEMBER -> {
                 for (i in (30 + min) until cellsList.size) {
                     cellsList[i].visibility = View.INVISIBLE
-                    cellsList[i].text = ""
+                    cellsList[i].text = emptyString
                 }
             }
             Month.FEBRUARY -> {
                 val leapIndex = if (dateWithChosenMonth.isLeapYear) 29 else 28
                 for (i in (leapIndex + min) until cellsList.size) {
                     cellsList[i].visibility = View.INVISIBLE
-                    cellsList[i].text = ""
+                    cellsList[i].text = emptyString
                 }
             }
             else -> {
                 for (i in (31 + min) until cellsList.size) {
                     cellsList[i].visibility = View.INVISIBLE
-                    cellsList[i].text = ""
+                    cellsList[i].text = emptyString
                 }
             }
         }
@@ -412,12 +413,11 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         val firstDayOfWeekForChosenMonth = firstDayDate.dayOfWeek
         monthTitle = binding.tastiCalendarMonthName
         monthTitle.text =
-            firstDayDate.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
+            firstDayDate.month.getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())
                 .replaceFirstChar {
                     if (it.isLowerCase()) it.titlecase(Locale.getDefault())
                     else it.toString()
                 }
-
 
         if (!sundayFirst)
         // Case 1: monday is the first day of the week
@@ -461,12 +461,12 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
 
         // Unify the lists to be the same list
         val finalList: MutableList<TastiCalendarEvent>? =
-            if (events == null || events.isEmpty()) {
-                if (dates != null && dates.isNotEmpty()) {
+            if (events.isNullOrEmpty()) {
+                if (!dates.isNullOrEmpty()) {
                     dates.map { TastiCalendarEvent(it, "") }.toMutableList()
                 } else null
             } else events.toMutableList()
-        if (finalList == null || finalList.isEmpty()) return
+        if (finalList.isNullOrEmpty()) return
         finalList.sortBy { it.date.withYear(1970) }
 
         // Highlight the events
