@@ -32,12 +32,10 @@ jobs:
         run: echo "PCFET0NUWVBFIGh0bWw+PGh0bWw+PGhlYWQ+PG1ldGEgaHR0cC1lcXVpdj0iUmVmcmVzaCIgY29udGVudD0iMDsgdXJsPSd0YXN0aWNhbGVuZGFyL2luZGV4Lmh0bWwnIiAvPjwvaGVhZD48Ym9keT48L2JvZHk+PC9odG1sPgo=" | base64 -d > ./build/dokka/htmlMultiModule/index.html
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Upload Dokka HTML
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: |
-            build/dokka/htmlMultiModule
-            build/dokka/html
+          path: 'build/dokka/htmlMultiModule/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
