@@ -19,7 +19,7 @@ I wrote this library starting from a piece of [Birday](https://www.github.com/m-
 ```maven { url "https://jitpack.io" }```
 
 2. Open the ```build.gradle (Module:app)``` file of your app, and under dependencies, add:\
-``` implementation 'com.github.m-i-n-a-r:tasticalendar:1.3.6' ```
+``` implementation 'com.github.m-i-n-a-r:tasticalendar:1.4.0' ```
 
 3. Sync Gradle, and you're good to go!
 
@@ -34,12 +34,12 @@ I wrote this library starting from a piece of [Birday](https://www.github.com/m-
 </p>
 
 - Super lightweight
-- The color scheme automatically adapts to the app (Material You / Monet)
+- The color scheme automatically adapts to the app (Material Expressive)
 - Month layout (with different scales)
 - Year layout (adaptive depending on the month scale factor)
 - Clickable days, clickable month titles
 - Disable weekdays, different sunday highlight strategies
-- Automatic or manual "sunday as first day of the week" 
+- Automatic or manual "Sunday as first day of the week" 
 - Easily set any property or render a different year/month
 - Easily pass a collection of dates or TastiCalendarEvent objects to highlight a set of dates on a month
 - The library chooses the best contrast for the text color when a day is highlighted
