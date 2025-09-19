@@ -45,4 +45,16 @@
         <attr name="tcShowInfoSnackBars" />
         <attr name="tcAppearance" />
     </declare-styleable>
+
+    <!-- Trying to make the color approach safer and robust -->
+    <attr name="colorPrimary" format="color" />
+    <attr name="colorSecondary" format="color" />
+    <attr name="colorTertiary" format="color" />
+    <attr name="colorOnPrimary" format="color" />
+    <attr name="colorOnSurface" format="color" />
+    <attr name="colorOnSurfaceInverse" format="color" />
+    <attr name="colorOnSurfaceVariant" format="color" />
+    <attr name="colorOnBackground" format="color" />
+    <attr name="colorSurface" format="color" />
+
 </resources>

@@ -132,7 +132,7 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
         val date = LocalDate.now()
         if (date.year != year) return
         val chosenColor =
-            color ?: getThemeColor(com.google.android.material.R.attr.colorTertiary, context)
+            color ?: getThemeColor(R.attr.colorTertiary, context)
         val chosenDrawable =
             drawable ?: AppCompatResources.getDrawable(context, R.drawable.tasticalendar_ring)
         highlightDate(date, chosenColor, chosenDrawable, asForeground = true)
@@ -189,7 +189,7 @@ class TastiCalendarYear(context: Context, attrs: AttributeSet) : LinearLayout(co
             // Highlight the dates
             highlightDate(
                 event.date,
-                getThemeColor(com.google.android.material.R.attr.colorPrimary, context),
+                getThemeColor(R.attr.colorPrimary, context),
                 AppCompatResources.getDrawable(context, R.drawable.tasticalendar_circle),
                 makeBold = false,
                 autoOpacity = true,

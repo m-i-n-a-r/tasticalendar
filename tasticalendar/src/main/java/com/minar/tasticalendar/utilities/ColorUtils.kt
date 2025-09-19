@@ -4,13 +4,28 @@ import android.content.Context
 import android.graphics.Color
 import android.util.TypedValue
 import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
+import com.google.android.material.color.MaterialColors
 
-// Return any attr color, to use it programmatically
-fun getThemeColor(@AttrRes attrRes: Int, context: Context): Int {
-    val typedValue = TypedValue()
-    context.theme.resolveAttribute(attrRes, typedValue, true)
-    return typedValue.data
+
+// Get the color for an attribute with MaterialColors, or with resolveAttribute. If it doesn't exist, fallback
+fun getThemeColor(@AttrRes attrRes: Int, context: Context, @ColorInt fallback: Int = Color.BLACK): Int {
+    return try {
+        // Get the color using MaterialColors
+        MaterialColors.getColor(context, attrRes, fallback)
+    } catch (_: Exception) {
+        val tv = TypedValue()
+        val resolved = context.theme.resolveAttribute(attrRes, tv, true)
+        if (!resolved) return fallback
+        return if (tv.resourceId != 0) {
+            ContextCompat.getColor(context, tv.resourceId)
+        } else {
+            tv.data
+        }
+    }
 }
+
 
 // Return a color to maximize the visibility on another color
 fun getBestContrast(color: Int, context: Context, alpha: Int = 255, isDark: Boolean? = null): Int {

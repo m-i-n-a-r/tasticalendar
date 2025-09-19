@@ -27,6 +27,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.time.format.TextStyle
 import java.util.*
+import androidx.core.view.isVisible
 
 /**
  * A class representing a month.
@@ -196,7 +197,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             // Manage single digit dates differently
             val dayNumber = if (dayValue <= 9) " $dayValue" else dayValue.toString()
             cellsList[i].text = dayNumber
-            cellsList[i].visibility = View.VISIBLE
+            cellsList[i].visibility = VISIBLE
             // Accessibility related info
             try {
                 val correspondingDate =
@@ -209,26 +210,26 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         }
         // Hide unnecessary cells, also resetting the text to avoid false positive when highlighting
         if (min != 0) for (i in 0 until min) {
-            cellsList[i].visibility = View.INVISIBLE
+            cellsList[i].visibility = INVISIBLE
             cellsList[i].text = emptyString
         }
         when (dateWithChosenMonth.month) {
             Month.NOVEMBER, Month.APRIL, Month.JUNE, Month.SEPTEMBER -> {
                 for (i in (30 + min) until cellsList.size) {
-                    cellsList[i].visibility = View.INVISIBLE
+                    cellsList[i].visibility = INVISIBLE
                     cellsList[i].text = emptyString
                 }
             }
             Month.FEBRUARY -> {
                 val leapIndex = if (dateWithChosenMonth.isLeapYear) 29 else 28
                 for (i in (leapIndex + min) until cellsList.size) {
-                    cellsList[i].visibility = View.INVISIBLE
+                    cellsList[i].visibility = INVISIBLE
                     cellsList[i].text = emptyString
                 }
             }
             else -> {
                 for (i in (31 + min) until cellsList.size) {
-                    cellsList[i].visibility = View.INVISIBLE
+                    cellsList[i].visibility = INVISIBLE
                     cellsList[i].text = emptyString
                 }
             }
@@ -276,7 +277,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         for (cell in cellsList) {
 
             // Check, for each cell, if it's the wanted day and it's visible
-            if (cell.text.trim() == day.toString() && cell.visibility == View.VISIBLE) {
+            if (cell.text.trim() == day.toString() && cell.isVisible) {
                 // Day found, now highlight it accordingly
                 if (drawable == null) {
                     // No drawable, color the text
@@ -388,20 +389,20 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                 weekDaysList[6].text = saturday.getDisplayName(TextStyle.NARROW, locale)
             }
         } else {
-            weekDaysList[0].visibility = View.GONE
-            weekDaysList[1].visibility = View.GONE
-            weekDaysList[2].visibility = View.GONE
-            weekDaysList[3].visibility = View.GONE
-            weekDaysList[4].visibility = View.GONE
-            weekDaysList[5].visibility = View.GONE
-            weekDaysList[6].visibility = View.GONE
+            weekDaysList[0].visibility = GONE
+            weekDaysList[1].visibility = GONE
+            weekDaysList[2].visibility = GONE
+            weekDaysList[3].visibility = GONE
+            weekDaysList[4].visibility = GONE
+            weekDaysList[5].visibility = GONE
+            weekDaysList[6].visibility = GONE
         }
         // Some resetting logic
         if (monthDate.year != dateWithChosenMonth.year) {
             eventCount = 0
             binding.tastiCalendarMonthName.setTextColor(
                 getThemeColor(
-                    com.google.android.material.R.attr.colorSecondary,
+                    R.attr.colorSecondary,
                     context
                 )
             )
@@ -484,7 +485,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             // Highlight the dates
             highlightDay(
                 event.date.dayOfMonth,
-                getThemeColor(com.google.android.material.R.attr.colorPrimary, context),
+                getThemeColor(R.attr.colorPrimary, context),
                 AppCompatResources.getDrawable(context, R.drawable.tasticalendar_circle),
                 makeBold = false,
                 autoOpacity = true,
@@ -713,7 +714,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
             }
             cell.setTextColor(
                 getThemeColor(
-                    com.google.android.material.R.attr.colorOnBackground,
+                    R.attr.colorOnBackground,
                     context
                 )
             )
@@ -731,13 +732,13 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
         if (dateWithChosenMonth.month == LocalDate.now().month && dateWithChosenMonth.year == LocalDate.now().year) {
             monthTitle.setTextColor(
                 getThemeColor(
-                    com.google.android.material.R.attr.colorTertiary,
+                    R.attr.colorTertiary,
                     context
                 )
             )
         } else monthTitle.setTextColor(
             getThemeColor(
-                com.google.android.material.R.attr.colorSecondary,
+                R.attr.colorSecondary,
                 context
             )
         )
@@ -749,7 +750,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                 weekDaysList[sundayIndex].setTypeface(null, Typeface.NORMAL)
                 weekDaysList[sundayIndex].setTextColor(
                     getThemeColor(
-                        com.google.android.material.R.attr.colorOnSurfaceVariant,
+                        R.attr.colorOnSurfaceVariant,
                         context
                     )
                 )
@@ -758,7 +759,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                 weekDaysList[sundayIndex].setTypeface(null, Typeface.BOLD)
                 weekDaysList[sundayIndex].setTextColor(
                     getThemeColor(
-                        com.google.android.material.R.attr.colorOnSurfaceVariant,
+                        R.attr.colorOnSurfaceVariant,
                         context
                     )
                 )
@@ -767,7 +768,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                 weekDaysList[sundayIndex].setTypeface(null, Typeface.NORMAL)
                 weekDaysList[sundayIndex].setTextColor(
                     getThemeColor(
-                        com.google.android.material.R.attr.colorTertiary,
+                        R.attr.colorTertiary,
                         context
                     )
                 )
@@ -776,7 +777,7 @@ class TastiCalendarMonth(context: Context, attrs: AttributeSet) : LinearLayout(c
                 weekDaysList[sundayIndex].setTypeface(null, Typeface.BOLD)
                 weekDaysList[sundayIndex].setTextColor(
                     getThemeColor(
-                        com.google.android.material.R.attr.colorTertiary,
+                        R.attr.colorTertiary,
                         context
                     )
                 )
